@@ -7,20 +7,19 @@ CFLAGS = -Wall -Wextra -Werror #-g -ggdb3 -fsanitize=address
 CFILES = \
 main.c
 
-VPATH = $(ODIR)
 ODIR = o-files
 OBJECTS = $(patsubst %.c,%.o,$(CFILES))
 UNAME_S := $(shell uname -s)
 $(NAME): $(OBJECTS)
 ifeq ($(UNAME_S),Linux)
-	clang $(CFLAGS) $(addprefix $(ODIR)/,$(OBJECTS)) -o $(NAME)
+	$(CC) $(CFLAGS) $(addprefix $(ODIR)/,$(OBJECTS)) -o $(NAME)
 else
 	$(CC) $(CFLAGS) $(addprefix $(ODIR)/,$(OBJECTS)) -o $(NAME)
 endif
 
 %.o: %.c
 ifeq ($(UNAME_S),Linux)
-	clang $(CFLAGS) -c $< -o $(ODIR)/$@
+	$(CC) $(CFLAGS) -c $< -o $(ODIR)/$@
 else
 	$(CC) $(CFLAGS) -c $< -o $(ODIR)/$@ 
 endif
