@@ -1,7 +1,6 @@
 NAME = philosophers
 
 CC = gcc
-
 CFLAGS = -Wall -Wextra -Werror #-g -ggdb3 -fsanitize=address
 # -L followed by the relative path of the library to link it 
 CFILES = \
@@ -12,7 +11,7 @@ OBJECTS = $(patsubst %.c,%.o,$(CFILES))
 UNAME_S := $(shell uname -s)
 $(NAME): $(OBJECTS)
 ifeq ($(UNAME_S),Linux)
-	$(CC) $(CFLAGS) $(addprefix $(ODIR)/,$(OBJECTS)) -o $(NAME)
+	$(CC) $(CFLAGS) $(addprefix $(ODIR)/,$(OBJECTS)) -o $(NAME) -lpthread
 else
 	$(CC) $(CFLAGS) $(addprefix $(ODIR)/,$(OBJECTS)) -o $(NAME)
 endif
