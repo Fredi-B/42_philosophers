@@ -15,7 +15,8 @@ int time(void)
 	while (i < 5200)
 	{
 		gettimeofday(&tv_run, NULL);
-		i = ((tv_run.tv_sec * 1000) + (tv_run.tv_usec / 1000)) - ((tv_start.tv_sec * 1000) + (tv_start.tv_usec / 1000));
+		i = ((tv_run.tv_sec * 1000) + (tv_run.tv_usec / 1000)) \
+				- ((tv_start.tv_sec * 1000) + (tv_start.tv_usec / 1000));
 	}
 	printf("%li\n", i);
 
