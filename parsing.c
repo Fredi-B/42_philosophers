@@ -6,7 +6,7 @@ static int	check_input(int argc, char **argv);
 int	parsing(t_data *data, int argc, char **argv)
 {
 	if (check_input(argc, argv) == ERROR)
-		return (ERROR); // Error handling geadded?
+		return (ERROR);
 	get_data(data, argc, argv);
 	if (data->total_number_of_p == 0)
 	{
@@ -28,7 +28,7 @@ static int	check_input(int argc, char **argv)
 	i = 1;
 	while (argv[i])
 	{
-		if (ft_isnum(argv[i]) == FALSE)
+		if (ft_is_pos_int(argv[i]) == FALSE)
 		{
 			write(2, "Error: wrong argument\n", 22);
 			return (ERROR);

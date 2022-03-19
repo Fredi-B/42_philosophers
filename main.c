@@ -4,6 +4,7 @@ int	main(int argc, char **argv)
 {
 	t_data	data;
 
-	parsing(&data, argc, argv);
+	if (parsing(&data, argc, argv) == ERROR)
+		return (1);
 	return (0);
 }

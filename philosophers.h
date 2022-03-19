@@ -45,7 +45,7 @@ typedef struct	s_data
 /*  ------------------------------- main.c --------------------------------- */
 /*  ---------------------------- libft_utils.c ----------------------------- */
 int	ft_atoi(const char *str);
-int	ft_isnum(char *str);
+int	ft_is_pos_int(char *str);
 /*  ------------------------------ parsing.c ------------------------------- */
 int	parsing(t_data *data, int argc, char **argv);
 /*  ------------------------------- time.c --------------------------------- */

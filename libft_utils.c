@@ -51,7 +51,7 @@ static const char	*issign(const char *str, int *sign)
 	return (str);
 }
 
-int	ft_isnum(char *str)
+int	ft_is_pos_int(char *str)
 {
 	int	i;
 
@@ -63,7 +63,8 @@ int	ft_isnum(char *str)
 			i++;
 			continue ;
 		}
-		if (ft_isdigit(str[i]) == FALSE)
+		if (ft_isdigit(str[i]) == FALSE || \
+			(i == 9 && str[i] > '7') || i > 9)
 		return (FALSE);
 		i++;
 	}
