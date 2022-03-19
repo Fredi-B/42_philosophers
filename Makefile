@@ -3,7 +3,7 @@ NAME = philosophers
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror #-g -ggdb3 -fsanitize=address
 # -L followed by the relative path of the library to link it 
-CFILES = main.c parsing.c libft_utils.c
+CFILES = main.c parsing.c libft_utils.c init_mutexes.c
 
 ODIR = o-files
 OBJECTS = $(patsubst %.c,%.o,$(CFILES))

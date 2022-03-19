@@ -48,6 +48,8 @@ int	ft_atoi(const char *str);
 int	ft_is_pos_int(char *str);
 /*  ------------------------------ parsing.c ------------------------------- */
 int	parsing(t_data *data, int argc, char **argv);
+/*  ---------------------------- init_mutexes.c ---------------------------- */
+int	init_mutexes(t_data *data);
 /*  ------------------------------- time.c --------------------------------- */
 
 
