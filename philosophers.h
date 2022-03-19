@@ -7,14 +7,15 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
+# include <limits.h>
 # include <pthread.h>
 # include <sys/time.h>
 /* ----------------------------- Defines ----------------------------------- */
 
-/* # define TRUE 1
-# define FALSE 0
+# define TRUE 0
+# define FALSE 1
 # define OK 0
-# define ERROR -2 */
+# define ERROR 1
 
 /* ---------------------- Defines for debugging ---------------------------- */
 
@@ -26,21 +27,27 @@
 
 typedef struct	s_data
 {
-	int				cnt_p;
-	pthread_mutex_t	*mutex1;
+	int				total_number_of_p;
+	int				cnt_number_of_p;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				number_of_meals;
+	unsigned long	total_time;
+	pthread_mutex_t	*cutlery;
+	int				philosopher;
+	pthread_mutex_t	left_fork;
+	pthread_mutex_t	right_fork;
+	unsigned long	time_last_eaten;
 }				t_data;
 
-/* typedef struct s_in_out
-{
-	char			*name;
-	char			*here_doc;
-	int				mode;
-	struct s_in_out	*next;
-
-}				t_in_out;
- */
 /*  ------------------------ Function prototypes --------------------------- */
 /*  ------------------------------- main.c --------------------------------- */
+/*  ---------------------------- libft_utils.c ----------------------------- */
+int	ft_atoi(const char *str);
+int	ft_isnum(char *str);
+/*  ------------------------------ parsing.c ------------------------------- */
+int	parsing(t_data *data, int argc, char **argv);
 /*  ------------------------------- time.c --------------------------------- */
 
 
