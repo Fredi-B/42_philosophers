@@ -51,6 +51,6 @@ int	parsing(t_data *data, int argc, char **argv);
 /*  ---------------------------- init_mutexes.c ---------------------------- */
 int	init_mutexes(t_data *data);
 /*  ------------------------------- time.c --------------------------------- */
-
+void	free_data(t_data *data);
 
 #endif
