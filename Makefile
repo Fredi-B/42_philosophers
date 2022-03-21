@@ -2,12 +2,12 @@ NAME = philosophers
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror #-g -ggdb3 -fsanitize=address
-# -L followed by the relative path of the library to link it 
-CFILES = main.c parsing.c libft_utils.c init_mutexes.c
-
 ODIR = o-files
 OBJECTS = $(patsubst %.c,%.o,$(CFILES))
 UNAME_S := $(shell uname -s)
+CFILES = main.c parsing.c libft_utils.c free_data.c \
+			init_mutexes.c init_threads.c routine.c
+
 $(NAME): $(OBJECTS)
 ifeq ($(UNAME_S),Linux)
 	$(CC) $(CFLAGS) $(addprefix $(ODIR)/,$(OBJECTS)) -o $(NAME) -lpthread
