@@ -44,13 +44,19 @@ typedef struct	s_data
 /*  ------------------------ Function prototypes --------------------------- */
 /*  ------------------------------- main.c --------------------------------- */
 /*  ---------------------------- libft_utils.c ----------------------------- */
-int	ft_atoi(const char *str);
-int	ft_is_pos_int(char *str);
+int		ft_atoi(const char *str);
+int		ft_is_pos_int(char *str);
 /*  ------------------------------ parsing.c ------------------------------- */
-int	parsing(t_data *data, int argc, char **argv);
+int		parsing(t_data *data, int argc, char **argv);
 /*  ---------------------------- init_mutexes.c ---------------------------- */
 int		init_mutexes(t_data *data);
+/*  ---------------------------- init_threads.c ---------------------------- */
+int		init_threads(t_data *data);
+/*  ---------------------------=-- routine.c ------------------------------- */
+void	*routine(void *arg);
 /*  ------------------------------- time.c --------------------------------- */
+/*  ----------------------------- free_data.c ------------------------------ */
 void	free_data(t_data *data);
+void	err_exit(t_data *data, int exit_status, char *msg, int len);
 
 #endif
