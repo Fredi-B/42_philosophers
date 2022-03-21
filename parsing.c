@@ -45,9 +45,14 @@ static void	get_data(t_data *data, int argc, char **argv)
 	data->time_to_die = ft_atoi(argv[2]);
 	data->time_to_eat = ft_atoi(argv[3]);
 	data->time_to_sleep = ft_atoi(argv[4]);
-	data->total_time = 0;
 	if (argc == 6)
 		data->number_of_meals = ft_atoi(argv[5]);
 	else
 		data->number_of_meals = -1;
+	data->total_time = 0;
+	data->cutlery = NULL;
+	data->philosopher = 0;
+	data->left_fork = NULL;
+	data->right_fork = NULL;
+	data->time_last_eaten = 0;
 }
