@@ -34,10 +34,10 @@ typedef struct	s_data
 	int				time_to_sleep;
 	int				number_of_meals;
 	unsigned long	total_time;
-	pthread_mutex_t	*cutlery;
+	pthread_mutex_t	**cutlery;
 	int				philosopher;
-	pthread_mutex_t	left_fork;
-	pthread_mutex_t	right_fork;
+	pthread_mutex_t	*left_fork;
+	pthread_mutex_t	*right_fork;
 	unsigned long	time_last_eaten;
 }				t_data;
 
@@ -49,7 +49,7 @@ int	ft_is_pos_int(char *str);
 /*  ------------------------------ parsing.c ------------------------------- */
 int	parsing(t_data *data, int argc, char **argv);
 /*  ---------------------------- init_mutexes.c ---------------------------- */
-int	init_mutexes(t_data *data);
+int		init_mutexes(t_data *data);
 /*  ------------------------------- time.c --------------------------------- */
 void	free_data(t_data *data);
 
