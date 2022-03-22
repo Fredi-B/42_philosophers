@@ -41,7 +41,7 @@ static int	check_input(int argc, char **argv)
 static void	get_data(t_data *data, int argc, char **argv)
 {
 	data->total_number_of_p = ft_atoi(argv[1]);
-	data->cnt_number_of_p = 0;
+	data->cnt_number_of_p = NULL;
 	data->time_to_die = ft_atoi(argv[2]);
 	data->time_to_eat = ft_atoi(argv[3]);
 	data->time_to_sleep = ft_atoi(argv[4]);
@@ -49,8 +49,10 @@ static void	get_data(t_data *data, int argc, char **argv)
 		data->number_of_meals = ft_atoi(argv[5]);
 	else
 		data->number_of_meals = -1;
+	data->start_time = NULL;
 	data->total_time = 0;
 	data->cutlery = NULL;
+	data->print_mutex = NULL;
 	data->philosopher = 0;
 	data->left_fork = NULL;
 	data->right_fork = NULL;
