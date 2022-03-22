@@ -1,5 +1,7 @@
 #include "philosophers.h"
 
+static int	init_print_mutex(t_data *data);
+
 int	init_mutexes(t_data *data)
 {
 	int	i;
@@ -22,5 +24,35 @@ int	init_mutexes(t_data *data)
 		pthread_mutex_init(data->cutlery[i], NULL);
 		i++;
 	}
+	if (init_print_mutex(data) == ERROR)
+		return (ERROR);
+	return (OK);
+}
+
+static int	init_print_mutex(t_data *data)
+{
+	data->print_mutex = malloc(sizeof(pthread_mutex_t));
+	if (!data->print_mutex)
+	{
+		write(2, "Error: malloc print_mutex\n", 26);
+		return (ERROR);
+	}
+	pthread_mutex_init(data->print_mutex, NULL);
+	// to do: free data->cnt_number_of_p
+	data->cnt_number_of_p = malloc(sizeof(int));
+	if (!data->cnt_number_of_p)
+	{
+		write(2, "Error: malloc cnt_number_of_p\n", 30);
+		return (ERROR);
+	}
+	*data->cnt_number_of_p = 0;
+	// to do: free data->start_time
+	data->start_time = malloc(sizeof(unsigned long));
+	if (!data->start_time)
+	{
+		write(2, "Error: malloc start_time\n", 25);
+		return (ERROR);
+	}
+	*data->start_time = 0;
 	return (OK);
 }
