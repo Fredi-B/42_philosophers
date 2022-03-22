@@ -21,6 +21,9 @@ static void	free_mutexes(t_data *data)
 	}
 	free(data->cutlery);
 	data->cutlery = NULL;
+	pthread_mutex_destroy(data->print_mutex);
+	free(data->print_mutex);
+	data->print_mutex = NULL;
 }
 
 /* frees everything needed. prints out error message */
