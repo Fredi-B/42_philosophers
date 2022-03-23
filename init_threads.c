@@ -26,10 +26,13 @@ int	init_threads(t_data *data)
 	}
 	// doctor thread to check if everyone is still alive
 	thread[i] = malloc(sizeof(pthread_t));
-	if (!philosopher || !thread)
+	if (!thread[i])
 		err_exit(data, 6, "Error: malloc thread[i]\n", 24);
+	if (pthread_create(thread[i], NULL, &doctor, philosopher) != 0)
+		err_exit(data, 6, "Error: create doctor thread\n", 28);
+
 	i = 0;
-	while (i < data->total_number_of_p)
+	while (i < data->total_number_of_p + 1)
 	{
 		if (pthread_join(*thread[i], NULL) != 0)
 			err_exit(data, 7, "Error: join threads\n", 20);
@@ -48,7 +51,6 @@ static void	copy_data(t_data *data, t_data *philosopher, int i)
 	philosopher->number_of_meals = data->number_of_meals;
 	philosopher->enough_meals = data->enough_meals;
 	philosopher->start_time = data->start_time;
-	philosopher->total_time = 0;
 	philosopher->print_mutex = data->print_mutex;
 	philosopher->cutlery = data->cutlery;
 	philosopher->philosopher = i + 1;
@@ -57,6 +59,7 @@ static void	copy_data(t_data *data, t_data *philosopher, int i)
 		philosopher->right_fork = data->cutlery[0];
 	else
 		philosopher->right_fork = data->cutlery[i + 1];
-	philosopher->time_last_eaten = 0;
+	philosopher->time_last_eaten = NULL;
 	philosopher->times_eaten = data->times_eaten;
+	philosopher->died = data->died;
 }

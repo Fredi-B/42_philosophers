@@ -8,11 +8,11 @@ void	eat(t_data *philosopher)
 	struct timeval	just_eaten;
 
 	take_forks(philosopher);
-	usleep(philosopher->time_to_eat);
-	gettimeofday(&just_eaten, NULL);
-	philosopher->time_last_eaten = ((just_eaten.tv_sec * 1000) \
-									+ (just_eaten.tv_usec / 1000));
 	protected_print(philosopher, EAT);
+	usleep(philosopher->time_to_eat * 1000);
+	gettimeofday(&just_eaten, NULL);
+	*philosopher->time_last_eaten = ((just_eaten.tv_sec * 1000) \
+									+ (just_eaten.tv_usec / 1000));
 	put_forks(philosopher);
 }
 
