@@ -62,5 +62,13 @@ static int	init_print_mutex(t_data *data)
 		return (ERROR);
 	}
 	*data->enough_meals = 0;
+	// to do: free data->died
+	data->died = malloc(sizeof(int));
+	if (!data->died)
+	{
+		write(2, "Error: malloc died\n", 19);
+		return (ERROR);
+	}
+	*data->died = FALSE;
 	return (OK);
 }
