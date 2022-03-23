@@ -41,18 +41,22 @@ int	init_threads(t_data *data)
 static void	copy_data(t_data *data, t_data *philosopher, int i)
 {
 	philosopher->total_number_of_p = data->total_number_of_p;
-	philosopher->cnt_number_of_p = 0;
+	philosopher->cnt_number_of_p = data->cnt_number_of_p;
 	philosopher->time_to_die = data->time_to_die;
 	philosopher->time_to_eat = data->time_to_eat;
 	philosopher->time_to_sleep = data->time_to_sleep;
 	philosopher->number_of_meals = data->number_of_meals;
+	philosopher->enough_meals = data->enough_meals;
+	philosopher->start_time = data->start_time;
 	philosopher->total_time = 0;
+	philosopher->print_mutex = data->print_mutex;
 	philosopher->cutlery = data->cutlery;
 	philosopher->philosopher = i + 1;
 	philosopher->left_fork = data->cutlery[i];
-	if (i != data->total_number_of_p)
-		philosopher->right_fork = data->cutlery[i + 1];
-	else
+	if (i == data->total_number_of_p - 1)
 		philosopher->right_fork = data->cutlery[0];
+	else
+		philosopher->right_fork = data->cutlery[i + 1];
 	philosopher->time_last_eaten = 0;
+	philosopher->times_eaten = data->times_eaten;
 }

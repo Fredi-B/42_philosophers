@@ -16,6 +16,13 @@
 # define FALSE 1
 # define OK 0
 # define ERROR 1
+# define L_FORK 0
+# define R_FORK 4
+# define EAT 1
+# define SLEEP 2
+# define THINK 3
+# define DIED 5
+
 
 /* ---------------------- Defines for debugging ---------------------------- */
 
@@ -28,17 +35,21 @@
 typedef struct	s_data
 {
 	int				total_number_of_p;
-	int				cnt_number_of_p;
+	int				*cnt_number_of_p;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				number_of_meals;
+	int				*enough_meals;
+	unsigned long	*start_time;
 	unsigned long	total_time;
+	pthread_mutex_t	*print_mutex;
 	pthread_mutex_t	**cutlery;
 	int				philosopher;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
 	unsigned long	time_last_eaten;
+	int				times_eaten;
 }				t_data;
 
 /*  ------------------------ Function prototypes --------------------------- */
@@ -54,6 +65,11 @@ int		init_mutexes(t_data *data);
 int		init_threads(t_data *data);
 /*  ---------------------------=-- routine.c ------------------------------- */
 void	*routine(void *arg);
+void	protected_print(t_data *philosopher, int state);
+/*  -------------------------------- eat.c --------------------------------- */
+void	eat(t_data *philosopher);
+/*  -------------------------- sleep_and_think.c --------------------------- */
+void	sleep_and_think(t_data *philosopher);
 /*  ------------------------------- time.c --------------------------------- */
 /*  ----------------------------- free_data.c ------------------------------ */
 void	free_data(t_data *data);

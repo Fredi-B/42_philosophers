@@ -54,5 +54,13 @@ static int	init_print_mutex(t_data *data)
 		return (ERROR);
 	}
 	*data->start_time = 0;
+	// to do: free data->enough_meals
+	data->enough_meals = malloc(sizeof(int));
+	if (!data->enough_meals)
+	{
+		write(2, "Error: malloc enough_meals\n", 27);
+		return (ERROR);
+	}
+	*data->enough_meals = 0;
 	return (OK);
 }

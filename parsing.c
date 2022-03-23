@@ -49,6 +49,7 @@ static void	get_data(t_data *data, int argc, char **argv)
 		data->number_of_meals = ft_atoi(argv[5]);
 	else
 		data->number_of_meals = -1;
+	data->enough_meals = NULL;
 	data->start_time = NULL;
 	data->total_time = 0;
 	data->cutlery = NULL;
@@ -57,4 +58,5 @@ static void	get_data(t_data *data, int argc, char **argv)
 	data->left_fork = NULL;
 	data->right_fork = NULL;
 	data->time_last_eaten = 0;
+	data->times_eaten = 0;
 }
