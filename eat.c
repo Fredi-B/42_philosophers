@@ -9,10 +9,10 @@ void	eat(t_data *philosopher)
 
 	take_forks(philosopher);
 	protected_print(philosopher, EAT);
-	usleep(philosopher->time_to_eat * 1000);
 	gettimeofday(&just_eaten, NULL);
 	*philosopher->time_last_eaten = ((just_eaten.tv_sec * 1000) \
 									+ (just_eaten.tv_usec / 1000));
+	usleep(philosopher->time_to_eat * 1000);
 	put_forks(philosopher);
 }
 
