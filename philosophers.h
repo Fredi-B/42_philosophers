@@ -36,7 +36,7 @@ typedef struct	s_data
 {
 	int				total_number_of_p;
 	int				*cnt_number_of_p;
-	unsigned long	time_to_die;
+	long			time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				number_of_meals;
