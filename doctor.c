@@ -5,7 +5,7 @@ void	*doctor(void *arg)
 	t_data			**philosophers;
 	struct timeval	tv;
 	unsigned long	current_time;
-	unsigned long	time_passed;
+	long	time_passed;
 	int				i;
 
 	philosophers = (t_data **)arg;
@@ -22,6 +22,9 @@ void	*doctor(void *arg)
 			*philosophers[i]->died = TRUE;
 			break ;
 		}
+		i++;
+		if (i == philosophers[1]->total_number_of_p)
+			i = 0;
 	}
 	return (OK);
 }
