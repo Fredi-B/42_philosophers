@@ -41,7 +41,7 @@ static void	wait_for_all_philosophers(t_data *philosopher)
 									+ (start_time.tv_usec / 1000);
 	}
 	else
-		usleep(500);
+		usleep(1000);
 	*philosopher->time_last_eaten = *philosopher->start_time;
 	if (philosopher->philosopher % 2)
 		usleep(200);
