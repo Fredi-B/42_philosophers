@@ -42,6 +42,7 @@ typedef struct	s_data
 	int				number_of_meals;
 	int				*enough_meals;
 	unsigned long	*start_time;
+	unsigned long	*runtime;
 	pthread_mutex_t	*print_mutex;
 	pthread_mutex_t	**cutlery;
 	int				philosopher;
@@ -70,9 +71,11 @@ void	protected_print(t_data *philosopher, int state);
 void	eat(t_data *philosopher);
 /*  -------------------------- sleep_and_think.c --------------------------- */
 void	sleep_and_think(t_data *philosopher);
+void	ft_sleep(unsigned long chill);
 /*  ------------------------------ doctor.c -------------------------------- */
 void	*doctor(void *arg);
 /*  ------------------------------- time.c --------------------------------- */
+unsigned long	get_time(void);
 /*  ----------------------------- free_data.c ------------------------------ */
 void	free_data(t_data *data);
 void	err_exit(t_data *data, int exit_status, char *msg, int len);

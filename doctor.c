@@ -3,20 +3,19 @@
 void	*doctor(void *arg)
 {
 	t_data			**philosophers;
-	struct timeval	tv;
 	unsigned long	current_time;
 	long			time_passed;
 	int				i;
 
 	philosophers = (t_data **)arg;
+	current_
 	usleep(philosophers[1]->time_to_die * 900);
 	i = 0;
 	while (1)
 	{
-		gettimeofday(&tv, NULL);
-		current_time = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
+		*philosophers[1]->runtime = get_time() - *philosophers[1]->start_time;
+		current_time = get_time();
 		time_passed = (current_time - *philosophers[i]->time_last_eaten);
-
 		if (time_passed > philosophers[i]->time_to_die)
 		{
 			protected_print(philosophers[i], DIED);

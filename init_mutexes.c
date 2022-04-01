@@ -70,5 +70,13 @@ static int	init_print_mutex(t_data *data)
 		return (ERROR);
 	}
 	*data->died = FALSE;
+	// to do: free data->runtime
+	data->runtime = malloc(sizeof(unsigned long));
+	if (!data->runtime)
+	{
+		write(2, "Error: malloc runtime\n", 23);
+		return (ERROR);
+	}
+	*data->runtime = 0;
 	return (OK);
 }
