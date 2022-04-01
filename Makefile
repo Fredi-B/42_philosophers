@@ -7,7 +7,8 @@ OBJECTS = $(patsubst %.c,%.o,$(CFILES))
 UNAME_S := $(shell uname -s)
 CFILES = main.c parsing.c libft_utils.c free_data.c \
 			init_mutexes.c init_threads.c routine.c \
-			eat.c sleep_and_think.c doctor.c
+			eat.c sleep_and_think.c doctor.c \
+			time.c
 
 $(NAME): $(OBJECTS)
 ifeq ($(UNAME_S),Linux)

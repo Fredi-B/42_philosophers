@@ -5,14 +5,10 @@ static void	put_forks(t_data *philosopher);
 
 void	eat(t_data *philosopher)
 {
-	struct timeval	just_eaten;
-
 	take_forks(philosopher);
 	protected_print(philosopher, EAT);
-	gettimeofday(&just_eaten, NULL);
-	*philosopher->time_last_eaten = ((just_eaten.tv_sec * 1000) \
-									+ (just_eaten.tv_usec / 1000));
-	usleep(philosopher->time_to_eat * 1000);
+	*philosopher->time_last_eaten = get_time();
+	ft_sleep(philosopher->time_to_eat);
 	put_forks(philosopher);
 }
 
