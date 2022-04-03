@@ -10,8 +10,7 @@ void	*doctor(void *arg)
 	int				i;
 
 	philosophers = (t_data **)arg;
-	update_runtime(philosophers[1]);
-	usleep(philosophers[1]->time_to_die * 900);
+	doctor_sleeps(philosophers[0]);
 	i = 0;
 	while (1)
 	{
@@ -45,4 +44,12 @@ static void	update_runtime(t_data *philosopher)
 		*philosopher->runtime = get_time() - *philosopher->start_time;
 		usleep(10);
 	}
+}
+
+static void	doctor_sleeps(t_data *philosopher)
+{
+	if (philosopher->total_number_of_p > 30)
+		usleep(philosopher->time_to_die * 900);
+	else
+		usleep(philosopher->time_to_die * 300);
 }
