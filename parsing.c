@@ -18,7 +18,7 @@ int	parsing(t_data *data, int argc, char **argv)
 
 static int	check_input(int argc, char **argv)
 {
-	int i;
+	int	i;
 
 	if (argc != 5 && argc != 6)
 	{

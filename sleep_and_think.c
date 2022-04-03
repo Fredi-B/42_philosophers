@@ -10,16 +10,15 @@ void	sleep_and_think(t_data *philosopher)
 	usleep(200);
 }
 
-
-void ft_sleep(unsigned long chill) 
+void	ft_sleep(unsigned long chill)
 {
-	unsigned long start_time; 
-	unsigned long current_time; 
+	unsigned long	start_time;
+	unsigned long	current_time;
 
 	start_time = get_time();
 	current_time = start_time;
 	while (current_time <= start_time + chill)
-	{ 
+	{
 		current_time = get_time();
 		usleep(20);
 	}

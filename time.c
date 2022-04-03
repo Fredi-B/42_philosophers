@@ -2,7 +2,7 @@
 
 unsigned long	get_time(void)
 {
-	struct timeval tv;
+	struct timeval	tv;
 	unsigned long	current_time;
 
 	gettimeofday(&tv, NULL);

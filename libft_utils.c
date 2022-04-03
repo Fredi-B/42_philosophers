@@ -2,7 +2,7 @@
 
 static const char	*isspacechar(const char *str);
 static const char	*issign(const char *str, int *sign);
-static int	ft_isdigit(int c);
+static int			ft_isdigit(int c);
 
 int	ft_atoi(const char *str)
 {
@@ -65,7 +65,7 @@ int	ft_is_pos_int(char *str)
 		}
 		if (ft_isdigit(str[i]) == FALSE || \
 			(i == 9 && str[i] > '7') || i > 9)
-		return (FALSE);
+			return (FALSE);
 		i++;
 	}
 	return (TRUE);
