@@ -30,7 +30,6 @@ int	init_threads(t_data *data)
 		err_exit(data, 6, "Error: malloc thread[i]\n", 24);
 	if (pthread_create(thread[i], NULL, &doctor, philosopher) != 0)
 		err_exit(data, 6, "Error: create doctor thread\n", 28);
-
 	i = 0;
 	while (i < data->total_number_of_p + 1)
 	{
@@ -56,10 +55,15 @@ static void	copy_data(t_data *data, t_data *philosopher, int i)
 	philosopher->cutlery = data->cutlery;
 	philosopher->philosopher = i + 1;
 	philosopher->left_fork = data->cutlery[i];
-	if (i == data->total_number_of_p - 1)
-		philosopher->right_fork = data->cutlery[0];
+	if (philosopher->total_number_of_p == 1)
+		philosopher->right_fork = NULL;
 	else
-		philosopher->right_fork = data->cutlery[i + 1];
+	{
+		if (i == data->total_number_of_p - 1)
+			philosopher->right_fork = data->cutlery[0];
+		else
+			philosopher->right_fork = data->cutlery[i + 1];
+	}
 	philosopher->time_last_eaten = NULL;
 	philosopher->times_eaten = data->times_eaten;
 	philosopher->died = data->died;
