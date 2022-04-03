@@ -5,6 +5,7 @@ static void	put_forks(t_data *philosopher);
 
 void	eat(t_data *philosopher)
 {
+	philosopher->times_eaten++;
 	take_forks(philosopher);
 	protected_print(philosopher, EAT);
 	*philosopher->time_last_eaten = get_time();
