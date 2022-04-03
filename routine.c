@@ -1,5 +1,7 @@
+
 #include "philosophers.h"
 
+static int	one_philosopher(t_data *philosopher);
 static void	wait_for_all_philosophers(t_data *philosopher);
 
 void	*routine(void *arg)
@@ -16,6 +18,8 @@ void	*routine(void *arg)
 	}
 	*philosopher->time_last_eaten = 0;
 	wait_for_all_philosophers(philosopher);
+	if (one_philosopher(philosopher) == TRUE)
+		return (0);
 	while (*philosopher->enough_meals != philosopher->total_number_of_p \
 			&& *philosopher->died == FALSE)
 	{
@@ -35,7 +39,7 @@ static void	wait_for_all_philosophers(t_data *philosopher)
 	if (philosopher->philosopher == philosopher->total_number_of_p)
 		*philosopher->start_time = get_time();
 	else
-		usleep(philosopher->total_number_of_p * 100);
+		usleep(philosopher->total_number_of_p * 80);
 	*philosopher->time_last_eaten = *philosopher->start_time;
 	if (philosopher->philosopher % 2)
 		usleep(philosopher->time_to_eat / 2);
@@ -54,7 +58,7 @@ void	protected_print(t_data *philosopher, int state)
 		printf("%li %i has taken right fork\n", *philosopher->runtime, philosopher->philosopher);
 	else if (state == EAT)
 	{
-		philosopher->times_eaten++;
+		/* ist's nötig das im mutex zu haben? */
 		if (philosopher->times_eaten == philosopher->number_of_meals)
 			(*philosopher->enough_meals)++;
 		printf("%li %i is eating\n\n", *philosopher->runtime, philosopher->philosopher);
@@ -66,4 +70,17 @@ void	protected_print(t_data *philosopher, int state)
 	else if (state == DIED)
 		printf("%li %i died\n", *philosopher->runtime, philosopher->philosopher);
 	pthread_mutex_unlock(philosopher->print_mutex);
+}
+
+static int	one_philosopher(t_data *philosopher)
+{
+	if (philosopher->total_number_of_p == 1)
+	{
+		pthread_mutex_lock(philosopher->left_fork);
+		protected_print(philosopher, L_FORK);
+		while (*philosopher->died != TRUE)
+			usleep(20);
+		return (TRUE);
+	}
+	return (FALSE);
 }
