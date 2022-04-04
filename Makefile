@@ -1,6 +1,6 @@
 NAME = philosophers
 
-CC = gcc
+CC = gcc #-g -fsanitize=thread
 CFLAGS = -Wall -Wextra -Werror #-g -ggdb3 -fsanitize=address
 ODIR = o-files
 OBJECTS = $(patsubst %.c,%.o,$(CFILES))
