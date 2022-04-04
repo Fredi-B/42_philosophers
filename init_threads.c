@@ -50,7 +50,6 @@ static void	copy_data(t_data *data, t_data *philosopher, int i)
 	philosopher->number_of_meals = data->number_of_meals;
 	philosopher->enough_meals = data->enough_meals;
 	philosopher->start_time = data->start_time;
-	philosopher->runtime = data->runtime;
 	philosopher->print_mutex = data->print_mutex;
 	philosopher->cutlery = data->cutlery;
 	philosopher->philosopher = i + 1;
