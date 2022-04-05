@@ -38,7 +38,7 @@ static int	init_print_mutex(t_data *data)
 		return (ERROR);
 	}
 	pthread_mutex_init(data->print_mutex, NULL);
-	// to do: free data->cnt_number_of_p
+	// to do: free data->cnt_number_of_p --> check
 	data->cnt_number_of_p = malloc(sizeof(int));
 	if (!data->cnt_number_of_p)
 	{
@@ -46,7 +46,7 @@ static int	init_print_mutex(t_data *data)
 		return (ERROR);
 	}
 	*data->cnt_number_of_p = 0;
-	// to do: free data->start_time
+	// to do: free data->start_time --> check
 	data->start_time = malloc(sizeof(long long));
 	if (!data->start_time)
 	{
@@ -54,7 +54,7 @@ static int	init_print_mutex(t_data *data)
 		return (ERROR);
 	}
 	*data->start_time = 0;
-	// to do: free data->enough_meals
+	// to do: free data->enough_meals --> check
 	data->enough_meals = malloc(sizeof(int));
 	if (!data->enough_meals)
 	{
@@ -62,7 +62,7 @@ static int	init_print_mutex(t_data *data)
 		return (ERROR);
 	}
 	*data->enough_meals = 0;
-	// to do: free data->died
+	// to do: free data->died --> check
 	data->died = malloc(sizeof(int));
 	if (!data->died)
 	{
