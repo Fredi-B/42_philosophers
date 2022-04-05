@@ -25,6 +25,8 @@ void	*doctor(void *arg)
 			break ;
 		}
 		i++;
+		if (*philosophers[0]->enough_meals == philosophers[0]->number_of_meals)
+			break;
 		if (i == philosophers[0]->total_number_of_p)
 			i = 0;
 	}
@@ -34,7 +36,7 @@ void	*doctor(void *arg)
 static void	doctor_sleeps(t_data *philosopher)
 {
 	if (philosopher->total_number_of_p > 30)
-		usleep(philosopher->time_to_die * 300);
+		usleep(philosopher->time_to_die * 500);
 	else
-		usleep(philosopher->time_to_die * 300);
+		usleep(philosopher->time_to_die * 500);
 }
