@@ -1,30 +1,27 @@
 #include "philosophers.h"
 
-static void	update_runtime(t_data *philosopher);
 static void	doctor_sleeps(t_data *philosopher);
 
 void	*doctor(void *arg)
 {
-	t_data			**philosophers;
-	unsigned long	current_time;
-	long			time_passed;
-	int				i;
+	t_data		**philosophers;
+	long long	current_time;
+	long long	time_passed;
+	int			i;
 
 	philosophers = (t_data **)arg;
-	update_runtime(philosophers[0]);
 	doctor_sleeps(philosophers[0]);
 	i = 0;
 	while (1)
 	{
 		current_time = get_time();
-		*philosophers[0]->runtime = current_time - *philosophers[0]->start_time;
 		time_passed = (current_time - *philosophers[i]->time_last_eaten);
 		if (time_passed >= philosophers[i]->time_to_die)
 		{
-			protected_print(philosophers[i], DIED);
+			protected_print(philosophers[i], "died\n", DIED);
 			*philosophers[i]->died = TRUE;
-			printf("time passed %li\n", time_passed);
-			printf("%i time last eaten %li\n", philosophers[i]->philosopher, *philosophers[i]->time_last_eaten - *philosophers[0]->start_time);
+			printf("time passed %lli\n", time_passed);
+			printf("%i time last eaten %lli\n", philosophers[i]->philosopher, *philosophers[i]->time_last_eaten - *philosophers[0]->start_time);
 			break ;
 		}
 		i++;
@@ -34,24 +31,10 @@ void	*doctor(void *arg)
 	return (OK);
 }
 
-static void	update_runtime(t_data *philosopher)
-{
-	unsigned long	start_time;
-
-	usleep(philosopher->total_number_of_p * 100);
-	*philosopher->runtime = get_time() - *philosopher->start_time;
-	start_time = *philosopher->runtime;
-	while (*philosopher->runtime < start_time + (philosopher->time_to_die / 2))
-	{
-		*philosopher->runtime = get_time() - *philosopher->start_time;
-		usleep(10);
-	}
-}
-
 static void	doctor_sleeps(t_data *philosopher)
 {
 	if (philosopher->total_number_of_p > 30)
-		usleep(philosopher->time_to_die * 900);
+		usleep(philosopher->time_to_die * 300);
 	else
 		usleep(philosopher->time_to_die * 300);
 }
