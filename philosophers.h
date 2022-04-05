@@ -42,13 +42,13 @@ typedef struct	s_data
 	int				time_to_sleep;
 	int				number_of_meals;
 	int				*enough_meals;
-	long long	*start_time;
+	long long		*start_time;
 	pthread_mutex_t	*print_mutex;
 	pthread_mutex_t	**cutlery;
 	int				philosopher;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
-	long long	*time_last_eaten;
+	long long		*time_last_eaten;
 	int				times_eaten;
 	int				*died;
 }				t_data;
