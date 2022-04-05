@@ -37,13 +37,15 @@ static void	wait_for_all_philosophers(t_data *philosopher)
 	pthread_mutex_unlock(philosopher->print_mutex);
 	while (*philosopher->cnt_number_of_p != philosopher->total_number_of_p)
 		usleep(50);
-	if (philosopher->philosopher == philosopher->total_number_of_p)
+	if (philosopher->philosopher == 1)
 		*philosopher->start_time = get_time();
+	else if (philosopher->total_number_of_p < 30)
+		usleep(philosopher->total_number_of_p * 15);
 	else
-		usleep(philosopher->total_number_of_p * 2);
+		usleep(philosopher->total_number_of_p * 5);
 	*philosopher->time_last_eaten = *philosopher->start_time;
 	if (philosopher->philosopher % 2)
-		usleep(philosopher->time_to_eat * 300);
+		usleep(philosopher->time_to_eat * 100);
 }
 
 void	protected_print(t_data *philosopher, char *action, int state)
