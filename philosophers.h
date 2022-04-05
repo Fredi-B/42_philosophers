@@ -42,14 +42,13 @@ typedef struct	s_data
 	int				time_to_sleep;
 	int				number_of_meals;
 	int				*enough_meals;
-	unsigned long	*start_time;
-	unsigned long	*runtime;
+	long long	*start_time;
 	pthread_mutex_t	*print_mutex;
 	pthread_mutex_t	**cutlery;
 	int				philosopher;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
-	unsigned long	*time_last_eaten;
+	long long	*time_last_eaten;
 	int				times_eaten;
 	int				*died;
 }				t_data;
@@ -67,7 +66,7 @@ int		init_mutexes(t_data *data);
 int		init_threads(t_data *data);
 /*  ---------------------------=-- routine.c ------------------------------- */
 void	*routine(void *arg);
-void	protected_print(t_data *philosopher, int state);
+void	protected_print(t_data *philosopher, char *action, int state);
 /*  -------------------------------- eat.c --------------------------------- */
 void	eat(t_data *philosopher);
 /*  -------------------------- sleep_and_think.c --------------------------- */
@@ -76,7 +75,7 @@ void	ft_sleep(t_data *philosopher, long long current_time, long long chill);
 /*  ------------------------------ doctor.c -------------------------------- */
 void	*doctor(void *arg);
 /*  ------------------------------- time.c --------------------------------- */
-unsigned long	get_time(void);
+long long	get_time(void);
 /*  ----------------------------- free_data.c ------------------------------ */
 void	free_data(t_data *data);
 void	err_exit(t_data *data, int exit_status, char *msg, int len);

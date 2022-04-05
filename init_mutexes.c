@@ -47,7 +47,7 @@ static int	init_print_mutex(t_data *data)
 	}
 	*data->cnt_number_of_p = 0;
 	// to do: free data->start_time
-	data->start_time = malloc(sizeof(unsigned long));
+	data->start_time = malloc(sizeof(long long));
 	if (!data->start_time)
 	{
 		write(2, "Error: malloc start_time\n", 25);
@@ -70,13 +70,5 @@ static int	init_print_mutex(t_data *data)
 		return (ERROR);
 	}
 	*data->died = FALSE;
-	// to do: free data->runtime
-	data->runtime = malloc(sizeof(unsigned long));
-	if (!data->runtime)
-	{
-		write(2, "Error: malloc runtime\n", 23);
-		return (ERROR);
-	}
-	*data->runtime = 0;
 	return (OK);
 }

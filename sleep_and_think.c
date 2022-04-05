@@ -2,8 +2,8 @@
 
 void	sleep_and_think(t_data *philosopher)
 {
-	unsigned long	current_time;
-	long			time_passed;
+	long long	current_time;
+	long long	time_passed;
 
 	protected_print(philosopher, "is sleeping\n", SLEEP);
 	current_time = get_time();
@@ -17,8 +17,9 @@ void	sleep_and_think(t_data *philosopher)
 		ft_sleep(philosopher, current_time, philosopher->time_to_sleep);
 	protected_print(philosopher, "is thinking\n", THINK);
 	if (philosopher->total_number_of_p > 30)
-		usleep(550);
-	usleep(200);
+		usleep(200);
+	else
+		usleep(50);
 }
 
 void	ft_sleep(t_data *philosopher, long long current_time, long long chill)

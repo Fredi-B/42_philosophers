@@ -42,7 +42,7 @@ static void	get_data(t_data *data, int argc, char **argv)
 {
 	data->total_number_of_p = ft_atoi(argv[1]);
 	data->cnt_number_of_p = NULL;
-	data->time_to_die = (unsigned long)ft_atoi(argv[2]);
+	data->time_to_die = (long long)ft_atoi(argv[2]);
 	data->time_to_eat = ft_atoi(argv[3]);
 	data->time_to_sleep = ft_atoi(argv[4]);
 	if (argc == 6)

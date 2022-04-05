@@ -10,10 +10,10 @@ void	*routine(void *arg)
 
 	philosopher = (t_data *)arg;
 	// to do: free philosopher[i]->time_last_eaten
-	philosopher->time_last_eaten = malloc(sizeof(unsigned long));
+	philosopher->time_last_eaten = malloc(sizeof(long long));
 	if (!philosopher->time_last_eaten)
 	{
-		write(2, "Errorphilosopher->time_last_eaten\n", 34);
+		write(2, "Error: philosopher->time_last_eaten\n", 36);
 		return (0);
 	}
 	*philosopher->time_last_eaten = 0;
@@ -39,10 +39,10 @@ static void	wait_for_all_philosophers(t_data *philosopher)
 	if (philosopher->philosopher == philosopher->total_number_of_p)
 		*philosopher->start_time = get_time();
 	else
-		usleep(philosopher->total_number_of_p * 80);
+		usleep(philosopher->total_number_of_p * 2);
 	*philosopher->time_last_eaten = *philosopher->start_time;
 	if (philosopher->philosopher % 2)
-		usleep(philosopher->time_to_eat / 2);
+		usleep(philosopher->time_to_eat * 300);
 }
 
 void	protected_print(t_data *philosopher, char *action, int state)
