@@ -45,30 +45,24 @@ static void	wait_for_all_philosophers(t_data *philosopher)
 		usleep(philosopher->time_to_eat / 2);
 }
 
-void	protected_print(t_data *philosopher, int state)
+void	protected_print(t_data *philosopher, char *action, int state)
 {
+	long long	current_time;
+	long long	runtime;
+
 	pthread_mutex_lock(philosopher->print_mutex);
+	current_time = get_time();
+	runtime = current_time - *philosopher->start_time;
 	if (*philosopher->enough_meals == philosopher->total_number_of_p \
 		|| *philosopher->died == TRUE)
 		exit(0);
-	// to do: change to "has taken a fork"
-	if (state == L_FORK)
-		printf("%li %i has taken left fork\n", *philosopher->runtime, philosopher->philosopher);
-	if (state == R_FORK)
-		printf("%li %i has taken right fork\n", *philosopher->runtime, philosopher->philosopher);
-	else if (state == EAT)
+	if (state == EAT)
 	{
-		/* ist's nötig das im mutex zu haben? */
 		if (philosopher->times_eaten == philosopher->number_of_meals)
 			(*philosopher->enough_meals)++;
-		printf("%li %i is eating\n\n", *philosopher->runtime, philosopher->philosopher);
+		*philosopher->time_last_eaten = current_time;
 	}
-	else if (state == SLEEP)
-		printf("%li %i is sleeping\n", *philosopher->runtime, philosopher->philosopher);
-	else if (state == THINK)
-		printf("%li %i is thinking\n", *philosopher->runtime, philosopher->philosopher);
-	else if (state == DIED)
-		printf("%li %i died\n", *philosopher->runtime, philosopher->philosopher);
+	printf("%lli %i %s", runtime, philosopher->philosopher, action);
 	pthread_mutex_unlock(philosopher->print_mutex);
 }
 
@@ -77,7 +71,7 @@ static int	one_philosopher(t_data *philosopher)
 	if (philosopher->total_number_of_p == 1)
 	{
 		pthread_mutex_lock(philosopher->left_fork);
-		protected_print(philosopher, L_FORK);
+		protected_print(philosopher, "has taken left fork\n", L_FORK);
 		while (*philosopher->died != TRUE)
 			usleep(20);
 		return (TRUE);
