@@ -5,6 +5,10 @@ static void	free_mutexes(t_data *data);
 void	free_data(t_data *data)
 {
 	free_mutexes(data);
+	free(data->cnt_number_of_p);
+	free(data->start_time);
+	free(data->enough_meals);
+	free(data->died);
 }
 
 static void	free_mutexes(t_data *data)
