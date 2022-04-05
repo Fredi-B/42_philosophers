@@ -9,7 +9,7 @@ void	*routine(void *arg)
 	t_data	*philosopher;
 
 	philosopher = (t_data *)arg;
-	// to do: free philosopher[i]->time_last_eaten
+	// to do: free philosopher[i]->time_last_eaten --> check
 	philosopher->time_last_eaten = malloc(sizeof(long long));
 	if (!philosopher->time_last_eaten)
 	{
@@ -26,6 +26,7 @@ void	*routine(void *arg)
 		eat(philosopher);
 		sleep_and_think(philosopher);
 	}
+	free(philosopher->time_last_eaten);
 	return (0);
 }
 
