@@ -72,7 +72,7 @@ void	protected_print(t_data *philosopher, int state);
 void	eat(t_data *philosopher);
 /*  -------------------------- sleep_and_think.c --------------------------- */
 void	sleep_and_think(t_data *philosopher);
-void	ft_sleep(unsigned long chill);
+void	ft_sleep(t_data *philosopher, long long current_time, long long chill);
 /*  ------------------------------ doctor.c -------------------------------- */
 void	*doctor(void *arg);
 /*  ------------------------------- time.c --------------------------------- */

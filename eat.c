@@ -7,9 +7,8 @@ void	eat(t_data *philosopher)
 {
 	philosopher->times_eaten++;
 	take_forks(philosopher);
-	protected_print(philosopher, EAT);
-	*philosopher->time_last_eaten = get_time();
-	ft_sleep(philosopher->time_to_eat);
+	current_time = *philosopher->time_last_eaten;
+	ft_sleep(philosopher, current_time, philosopher->time_to_eat);
 	put_forks(philosopher);
 }
 
