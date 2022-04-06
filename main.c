@@ -11,7 +11,6 @@ int	main(int argc, char **argv)
 	if (init_threads(&data) == ERROR)
 		err_exit(&data, 3, "Error in init_threads\n", 22);
 	free_data(&data);
-	dwrite(==);
-	system("leaks philosopher");
+	// system("leaks philosopher");
 	return (0);
 }
