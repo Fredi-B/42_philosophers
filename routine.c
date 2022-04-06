@@ -65,6 +65,8 @@ void	protected_print(t_data *philosopher, char *action, int state)
 			(*philosopher->enough_meals)++;
 		*philosopher->time_last_eaten = current_time;
 	}
+	if (*philosopher->enough_meals < philosopher->total_number_of_p \
+		|| *philosopher->died == FALSE)
 	printf("%lli %i %s", runtime, philosopher->philosopher, action);
 	pthread_mutex_unlock(philosopher->print_mutex);
 }
