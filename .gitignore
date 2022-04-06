@@ -54,3 +54,5 @@ dkms.conf
 # Misc
 philosophers
 outfile
+.vscode/launch.json
+.vscode/tasks.json
