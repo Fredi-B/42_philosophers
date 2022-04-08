@@ -1,13 +1,13 @@
 NAME = philosophers
 
-CC = gcc #-g -fsanitize=thread
+CC = gcc -g #-fsanitize=thread
 CFLAGS = -Wall -Wextra -Werror #-g -ggdb3 -fsanitize=address
 ODIR = o-files
 OBJECTS = $(patsubst %.c,%.o,$(CFILES))
 UNAME_S := $(shell uname -s)
 CFILES = main.c parsing.c libft_utils.c free_data.c \
-			init_mutexes.c init_threads.c routine.c \
-			eat.c sleep_and_think.c doctor.c \
+			init_mutexes.c init_pointer.c init_threads.c \
+			routine.c eat.c sleep_and_think.c doctor.c \
 			time.c
 
 $(NAME): $(OBJECTS)
