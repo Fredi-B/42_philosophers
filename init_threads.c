@@ -24,19 +24,9 @@ int	init_threads(t_data *data)
 			err_exit(data, 6, "Error: create threads\n", 22);
 		i++;
 	}
-	// doctor thread to check if everyone is still alive
-	thread[i] = malloc(sizeof(pthread_t));
-	if (!thread[i])
-		err_exit(data, 6, "Error: malloc thread[i]\n", 24);
-	if (pthread_create(thread[i], NULL, &doctor, philosopher) != 0)
-		err_exit(data, 6, "Error: create doctor thread\n", 28);
-	i = 0;
-	while (i < data->total_number_of_p + 1)
-	{
-		if (pthread_join(*thread[i], NULL) != 0)
-			err_exit(data, 7, "Error: join threads\n", 20);
-		i++;
-	}
+	create_doctor_thread(data, philosopher, thread, i);
+	join_threads(data, thread);
+	free_philosopher_and_threads(data, philosopher, thread);
 	return (OK);
 }
 
@@ -66,4 +56,27 @@ static void	copy_data(t_data *data, t_data *philosopher, int i)
 	philosopher->time_last_eaten = NULL;
 	philosopher->times_eaten = data->times_eaten;
 	philosopher->died = data->died;
+}
+
+static void	create_doctor_thread(t_data *data, \
+				t_data **philosopher, pthread_t **thread, int i)
+{
+	thread[i] = malloc(sizeof(pthread_t));
+	if (!thread[i])
+		err_exit(data, 6, "Error: malloc thread[i]\n", 24);
+	if (pthread_create(thread[i], NULL, &doctor, philosopher) != 0)
+		err_exit(data, 6, "Error: create doctor thread\n", 28);
+}
+
+static void	join_threads(t_data *data, pthread_t **thread)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->total_number_of_p + 1)
+	{
+		if (pthread_join(*thread[i], NULL) != 0)
+			err_exit(data, 7, "Error: join threads\n", 20);
+		i++;
+	}
 }
