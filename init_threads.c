@@ -9,7 +9,7 @@ int	init_threads(t_data *data)
 	int			i;
 
 	philosopher = malloc(sizeof(t_data *) * data->total_number_of_p);
-	thread = malloc(sizeof(pthread_t *) * data->total_number_of_p + 1);
+	thread = malloc(sizeof(pthread_t *) * (data->total_number_of_p + 1));
 	if (!philosopher || !thread)
 		err_exit(data, 4, "Error: malloc philosopher || thread\n", 36);
 	i = 0;
