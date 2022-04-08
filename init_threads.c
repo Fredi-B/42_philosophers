@@ -1,6 +1,9 @@
 #include "philosophers.h"
 
 static void	copy_data(t_data *data, t_data *philosopher, int i);
+static void	create_doctor_thread(t_data *data, \
+				t_data **philosopher, pthread_t **thread, int i);
+static void	join_threads(t_data *data, pthread_t **thread);
 
 int	init_threads(t_data *data)
 {
