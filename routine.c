@@ -1,4 +1,3 @@
-
 #include "philosophers.h"
 
 static int	one_philosopher(t_data *philosopher);
@@ -9,7 +8,6 @@ void	*routine(void *arg)
 	t_data	*philosopher;
 
 	philosopher = (t_data *)arg;
-	// to do: free philosopher[i]->time_last_eaten --> check
 	philosopher->time_last_eaten = malloc(sizeof(long long));
 	if (!philosopher->time_last_eaten)
 	{
@@ -26,7 +24,6 @@ void	*routine(void *arg)
 		eat(philosopher);
 		sleep_and_think(philosopher);
 	}
-	free(philosopher->time_last_eaten);
 	return (0);
 }
 
@@ -67,9 +64,6 @@ void	protected_print(t_data *philosopher, char *action, int state)
 			(*philosopher->enough_meals)++;
 		*philosopher->time_last_eaten = current_time;
 	}
-	if (*philosopher->enough_meals < philosopher->total_number_of_p \
-		|| *philosopher->died == FALSE)
-	printf("%lli %i %s", runtime, philosopher->philosopher, action);
 	pthread_mutex_unlock(philosopher->print_mutex);
 }
 
@@ -78,7 +72,7 @@ static int	one_philosopher(t_data *philosopher)
 	if (philosopher->total_number_of_p == 1)
 	{
 		pthread_mutex_lock(philosopher->left_fork);
-		protected_print(philosopher, "has taken left fork\n", L_FORK);
+		protected_print(philosopher, "has taken a fork\n", FORK);
 		while (*philosopher->died != TRUE)
 			usleep(20);
 		return (TRUE);

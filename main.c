@@ -11,7 +11,7 @@ int	main(int argc, char **argv)
 	if (init_pointer(&data) == ERROR)
 		err_exit(&data, 3, "Error in init_pointer\n", 22);
 	if (init_threads(&data) == ERROR)
-		err_exit(&data, 3, "Error in init_threads\n", 22);
+		err_exit(&data, 4, "Error in init_threads\n", 22);
 	free_data(&data);
 	// system("leaks philosopher");
 	return (0);

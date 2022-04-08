@@ -14,17 +14,17 @@ int	init_threads(t_data *data)
 	philosopher = malloc(sizeof(t_data *) * data->total_number_of_p);
 	thread = malloc(sizeof(pthread_t *) * (data->total_number_of_p + 1));
 	if (!philosopher || !thread)
-		err_exit(data, 4, "Error: malloc philosopher || thread\n", 36);
+		err_exit(data, 5, "Error: malloc philosopher || thread\n", 36);
 	i = 0;
 	while (i < data->total_number_of_p)
 	{
 		philosopher[i] = malloc(sizeof(t_data));
 		thread[i] = malloc(sizeof(pthread_t));
 		if (!philosopher || !thread)
-			err_exit(data, 5, "Error: malloc philosopher[i] || thread[i]\n", 42);
+			err_exit(data, 6, "Error: malloc philosopher[i] || thread[i]\n", 42);
 		copy_data(data, philosopher[i], i);
 		if (pthread_create(thread[i], NULL, &routine, philosopher[i]) != 0)
-			err_exit(data, 6, "Error: create threads\n", 22);
+			err_exit(data, 7, "Error: create threads\n", 22);
 		i++;
 	}
 	create_doctor_thread(data, philosopher, thread, i);

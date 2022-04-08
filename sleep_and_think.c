@@ -13,7 +13,7 @@ void	sleep_and_think(t_data *philosopher)
 		while (*philosopher->died != TRUE)
 			usleep(20);
 	}
-	else /* uebergebe auch current_time */
+	else
 		ft_sleep(philosopher, current_time, philosopher->time_to_sleep);
 	protected_print(philosopher, "is thinking\n", THINK);
 	if (philosopher->total_number_of_p > 30)
