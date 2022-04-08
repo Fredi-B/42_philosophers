@@ -20,7 +20,7 @@ void	*routine(void *arg)
 	wait_for_all_philosophers(philosopher);
 	if (one_philosopher(philosopher) == TRUE)
 		return (0);
-	while (*philosopher->enough_meals != philosopher->total_number_of_p \
+	while (*philosopher->enough_meals < philosopher->total_number_of_p \
 			&& *philosopher->died == FALSE)
 	{
 		eat(philosopher);
