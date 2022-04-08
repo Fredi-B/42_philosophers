@@ -25,8 +25,8 @@ void	*doctor(void *arg)
 			break ;
 		}
 		i++;
-		if (*philosophers[0]->enough_meals == philosophers[0]->number_of_meals)
-			break;
+		if (*philosophers[0]->enough_meals == \
+				philosophers[0]->total_number_of_p)
 		if (i == philosophers[0]->total_number_of_p)
 			i = 0;
 	}
