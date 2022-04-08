@@ -58,9 +58,9 @@ void	protected_print(t_data *philosopher, char *action, int state)
 	pthread_mutex_lock(philosopher->print_mutex);
 	current_time = get_time();
 	runtime = current_time - *philosopher->start_time;
-	if (*philosopher->enough_meals == philosopher->total_number_of_p \
-		|| *philosopher->died == TRUE)
-		exit(0);
+	if (*philosopher->enough_meals < philosopher->total_number_of_p \
+			&& *philosopher->died == FALSE)
+		printf("%lli %i %s", runtime, philosopher->philosopher, action);
 	if (state == EAT)
 	{
 		if (philosopher->times_eaten == philosopher->number_of_meals)
