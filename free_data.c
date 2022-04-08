@@ -6,9 +6,13 @@ void	free_data(t_data *data)
 {
 	free_mutexes(data);
 	free(data->cnt_number_of_p);
+	data->cnt_number_of_p = NULL;
 	free(data->start_time);
+	data->start_time = NULL;
 	free(data->enough_meals);
+	data->enough_meals = NULL;
 	free(data->died);
+	data->died = NULL;
 }
 
 static void	free_mutexes(t_data *data)
@@ -47,7 +51,7 @@ void	free_philosopher_and_threads(t_data *data, \
 		i++;
 	}
 	free(thread[i]);
-		thread[i] = NULL;
+	thread[i] = NULL;
 	free(thread);
 	thread = NULL;
 	free(philosopher);
