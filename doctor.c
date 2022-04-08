@@ -1,6 +1,8 @@
 #include "philosophers.h"
 
 static int	doctor_sleeps(t_data *philosopher);
+static void	philosopher_died(t_data **philosophers, \
+								long long current_time, int i);
 
 void	*doctor(void *arg)
 {
@@ -17,8 +19,7 @@ void	*doctor(void *arg)
 		time_passed = (current_time - *philosophers[i]->time_last_eaten);
 		if (time_passed >= philosophers[i]->time_to_die)
 		{
-			protected_print(philosophers[i], "died\n", DIED);
-			*philosophers[i]->died = TRUE;
+			philosopher_died(philosophers, current_time, i);
 			break ;
 		}
 		i++;
@@ -38,4 +39,13 @@ static int	doctor_sleeps(t_data *philosopher)
 	else
 		usleep(philosopher->time_to_die * 500);
 	return (0);
+}
+
+static void	philosopher_died(t_data **philosophers, \
+								long long current_time, int i)
+{
+	*philosophers[i]->died = TRUE;
+	usleep(50);
+	printf("%lli %i died\n", (current_time - \
+		*philosophers[i]->start_time), philosophers[i]->philosopher);
 }

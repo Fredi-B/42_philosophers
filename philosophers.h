@@ -19,7 +19,6 @@
 # define EAT 1
 # define SLEEP 2
 # define THINK 3
-# define DIED 5
 
 /* ---------------------- Defines for debugging ---------------------------- */
 
