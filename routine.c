@@ -39,12 +39,14 @@ static void	wait_for_all_philosophers(t_data *philosopher)
 		usleep(50);
 	if (philosopher->philosopher == 1)
 		*philosopher->start_time = get_time();
+	else if (philosopher->total_number_of_p < 8)
+		usleep(philosopher->total_number_of_p * 30);
 	else if (philosopher->total_number_of_p < 30)
 		usleep(philosopher->total_number_of_p * 15);
 	else
 		usleep(philosopher->total_number_of_p * 5);
 	*philosopher->time_last_eaten = *philosopher->start_time;
-	if (philosopher->philosopher % 2)
+	if (philosopher->philosopher % 2 && philosopher->total_number_of_p != 1)
 		usleep(philosopher->time_to_eat * 100);
 }
 
