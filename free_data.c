@@ -30,6 +30,30 @@ static void	free_mutexes(t_data *data)
 	data->print_mutex = NULL;
 }
 
+void	free_philosopher_and_threads(t_data *data, \
+			t_data **philosopher, pthread_t **thread)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->total_number_of_p)
+	{
+		free(philosopher[i]->time_last_eaten);
+		philosopher[i]->time_last_eaten = NULL;
+		free(philosopher[i]);
+		philosopher[i] = NULL;
+		free(thread[i]);
+		thread[i] = NULL;
+		i++;
+	}
+	free(thread[i]);
+		thread[i] = NULL;
+	free(thread);
+	thread = NULL;
+	free(philosopher);
+	philosopher = NULL;
+}
+
 /* frees everything needed. prints out error message */
 void	err_exit(t_data *data, int exit_status, char *msg, int len)
 {
