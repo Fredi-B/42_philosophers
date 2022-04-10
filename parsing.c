@@ -53,6 +53,9 @@ static void	get_data(t_data *data, int argc, char **argv)
 	data->start_time = NULL;
 	data->cutlery = NULL;
 	data->print_mutex = NULL;
+	data->start_mutex = NULL;
+	data->eaten_mutex = NULL;
+	data->enough_mutex = NULL;
 	data->philosopher = 0;
 	data->left_fork = NULL;
 	data->right_fork = NULL;

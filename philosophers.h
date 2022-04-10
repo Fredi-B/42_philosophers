@@ -22,10 +22,10 @@
 
 /* ---------------------- Defines for debugging ---------------------------- */
 
-/* # define dsprintf(expr) printf("\n" #expr ":\n|%s|\n", expr)
+# define dsprintf(expr) printf("\n" #expr ":\n|%s|\n", expr)
 # define diprintf(expr) printf("\n" #expr ":\n|%d|\n", expr)
 # define dlprintf(expr) printf("\n" #expr ":\n|%lli|\n", expr)
-# define dwrite(expr) write(2, "\n" #expr "\n", strlen(#expr) + 2) */
+# define dwrite(expr) write(2, "\n" #expr "\n", strlen(#expr) + 2)
 
 /* ----------------------------- Structures -------------------------------- */
 
@@ -40,6 +40,10 @@ typedef struct s_data
 	int				*enough_meals;
 	long long		*start_time;
 	pthread_mutex_t	*print_mutex;
+	pthread_mutex_t	*start_mutex;
+	pthread_mutex_t	*eaten_mutex;
+	pthread_mutex_t	*enough_mutex;
+
 	pthread_mutex_t	**cutlery;
 	int				philosopher;
 	pthread_mutex_t	*left_fork;

@@ -10,7 +10,9 @@ void	eat(t_data *philosopher)
 	philosopher->times_eaten++;
 	take_forks(philosopher);
 	protected_print(philosopher, "is eating\n", EAT);
+	pthread_mutex_lock(philosopher->eaten_mutex);
 	current_time = *philosopher->time_last_eaten;
+	pthread_mutex_unlock(philosopher->eaten_mutex);
 	ft_sleep(philosopher, current_time, philosopher->time_to_eat);
 	put_forks(philosopher);
 }

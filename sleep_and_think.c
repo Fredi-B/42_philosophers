@@ -4,14 +4,22 @@ void	sleep_and_think(t_data *philosopher)
 {
 	long long	current_time;
 	long long	time_passed;
+	int			someone_died;
 
 	protected_print(philosopher, "is sleeping\n", SLEEP);
 	current_time = get_time();
 	time_passed = (current_time - *philosopher->time_last_eaten);
 	if (time_passed + philosopher->time_to_sleep >= philosopher->time_to_die)
 	{
-		while (*philosopher->died != TRUE)
+		someone_died = FALSE;
+		while (someone_died == FALSE)
+		{
+			pthread_mutex_lock(philosopher->enough_mutex);
+			if (*philosopher->died == TRUE)
+				someone_died = TRUE;
+			pthread_mutex_unlock(philosopher->enough_mutex);
 			usleep(20);
+		}
 	}
 	else
 		ft_sleep(philosopher, current_time, philosopher->time_to_sleep);

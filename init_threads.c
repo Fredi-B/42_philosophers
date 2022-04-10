@@ -44,6 +44,9 @@ static void	copy_data(t_data *data, t_data *philosopher, int i)
 	philosopher->enough_meals = data->enough_meals;
 	philosopher->start_time = data->start_time;
 	philosopher->print_mutex = data->print_mutex;
+	philosopher->start_mutex = data->start_mutex;
+	philosopher->eaten_mutex = data->eaten_mutex;
+	philosopher->enough_mutex = data->enough_mutex;
 	philosopher->cutlery = data->cutlery;
 	philosopher->philosopher = i + 1;
 	philosopher->left_fork = data->cutlery[i];
