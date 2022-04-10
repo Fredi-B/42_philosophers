@@ -32,6 +32,15 @@ static void	free_mutexes(t_data *data)
 	pthread_mutex_destroy(data->print_mutex);
 	free(data->print_mutex);
 	data->print_mutex = NULL;
+	pthread_mutex_destroy(data->start_mutex);
+	free(data->start_mutex);
+	data->start_mutex = NULL;
+	pthread_mutex_destroy(data->eaten_mutex);
+	free(data->eaten_mutex);
+	data->eaten_mutex = NULL;
+	pthread_mutex_destroy(data->enough_mutex);
+	free(data->enough_mutex);
+	data->enough_mutex = NULL;
 }
 
 void	free_philosopher_and_threads(t_data *data, \
