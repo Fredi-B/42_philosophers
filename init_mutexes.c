@@ -1,6 +1,6 @@
 #include "philosophers.h"
 
-static int	init_print_mutex(t_data *data);
+static int	init_mutexes_two(t_data *data);
 
 int	init_mutexes(t_data *data)
 {
@@ -24,12 +24,12 @@ int	init_mutexes(t_data *data)
 		pthread_mutex_init(data->cutlery[i], NULL);
 		i++;
 	}
-	if (init_print_mutex(data) == ERROR)
+	if (init_mutexes_two(data) == ERROR)
 		return (ERROR);
 	return (OK);
 }
 
-static int	init_print_mutex(t_data *data)
+static int	init_mutexes_two(t_data *data)
 {
 	data->print_mutex = malloc(sizeof(pthread_mutex_t));
 	if (!data->print_mutex)
@@ -38,5 +38,26 @@ static int	init_print_mutex(t_data *data)
 		return (ERROR);
 	}
 	pthread_mutex_init(data->print_mutex, NULL);
+	data->start_mutex = malloc(sizeof(pthread_mutex_t));
+	if (!data->start_mutex)
+	{
+		write(2, "Error: malloc start_mutex\n", 26);
+		return (ERROR);
+	}
+	pthread_mutex_init(data->start_mutex, NULL);
+	data->eaten_mutex = malloc(sizeof(pthread_mutex_t));
+	if (!data->eaten_mutex)
+	{
+		write(2, "Error: malloc eaten_mutex\n", 26);
+		return (ERROR);
+	}
+	pthread_mutex_init(data->eaten_mutex, NULL);
+	data->enough_mutex = malloc(sizeof(pthread_mutex_t));
+	if (!data->enough_mutex)
+	{
+		write(2, "Error: malloc enough_mutex\n", 27);
+		return (ERROR);
+	}
+	pthread_mutex_init(data->enough_mutex, NULL);
 	return (OK);
 }
