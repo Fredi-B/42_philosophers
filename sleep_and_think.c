@@ -27,7 +27,7 @@ void	sleep_and_think(t_data *philosopher)
 	if (philosopher->total_number_of_p > 30)
 		usleep(200);
 	else
-		usleep(50);
+		usleep(200);
 }
 
 void	ft_sleep(t_data *philosopher, long long current_time, long long chill)
