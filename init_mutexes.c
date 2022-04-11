@@ -1,6 +1,7 @@
 #include "philosophers.h"
 
 static int	init_mutexes_two(t_data *data);
+static int	init_mutexes_three(t_data *data);
 
 int	init_mutexes(t_data *data)
 {
@@ -45,6 +46,13 @@ static int	init_mutexes_two(t_data *data)
 		return (ERROR);
 	}
 	pthread_mutex_init(data->start_mutex, NULL);
+	if (init_mutexes_three(data) == ERROR)
+		return (ERROR);
+	return (OK);
+}
+
+static int	init_mutexes_three(t_data *data)
+{
 	data->eaten_mutex = malloc(sizeof(pthread_mutex_t));
 	if (!data->eaten_mutex)
 	{
