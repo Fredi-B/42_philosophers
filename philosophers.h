@@ -22,10 +22,10 @@
 
 /* ---------------------- Defines for debugging ---------------------------- */
 
-# define dsprintf(expr) printf("\n" #expr ":\n|%s|\n", expr)
+/* # define dsprintf(expr) printf("\n" #expr ":\n|%s|\n", expr)
 # define diprintf(expr) printf("\n" #expr ":\n|%d|\n", expr)
 # define dlprintf(expr) printf("\n" #expr ":\n|%lli|\n", expr)
-# define dwrite(expr) write(2, "\n" #expr "\n", strlen(#expr) + 2)
+# define dwrite(expr) write(2, "\n" #expr "\n", strlen(#expr) + 2) */
 
 /* ----------------------------- Structures -------------------------------- */
 
@@ -55,6 +55,7 @@ typedef struct s_data
 
 /*  ------------------------ Function prototypes --------------------------- */
 /*  ------------------------------- main.c --------------------------------- */
+void		protected_print(t_data *philosopher, char *action, int state);
 /*  ---------------------------- libft_utils.c ----------------------------- */
 int			ft_atoi(const char *str);
 int			ft_is_pos_int(char *str);
@@ -68,7 +69,6 @@ int			init_pointer(t_data *data);
 int			init_threads(t_data *data);
 /*  ---------------------------=-- routine.c ------------------------------- */
 void		*routine(void *arg);
-void		protected_print(t_data *philosopher, char *action, int state);
 /*  -------------------------------- eat.c --------------------------------- */
 void		eat(t_data *philosopher);
 /*  -------------------------- sleep_and_think.c --------------------------- */
