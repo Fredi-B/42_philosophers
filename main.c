@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbechtol <fbechtol@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/11 16:11:27 by fbechtol          #+#    #+#             */
+/*   Updated: 2022/04/11 16:12:14 by fbechtol         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philosophers.h"
 
 int	main(int argc, char **argv)
@@ -13,7 +25,7 @@ int	main(int argc, char **argv)
 	if (init_threads(&data) == ERROR)
 		err_exit(&data, 4, "Error in init_threads\n", 22);
 	free_data(&data);
-	// system("leaks philosopher");
+	system("leaks philosopher");
 	return (0);
 }
 
