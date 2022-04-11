@@ -8,7 +8,7 @@ int	parsing(t_data *data, int argc, char **argv)
 	if (check_input(argc, argv) == ERROR)
 		return (ERROR);
 	get_data(data, argc, argv);
-	if (data->total_number_of_p == 0)
+	if (data->total_number_of_p == 0 || data->number_of_meals == 0)
 	{
 		write(2, "Error: wrong argument\n", 22);
 		return (ERROR);
