@@ -2,12 +2,12 @@
 
 static int	one_philosopher(t_data *philosopher);
 static void	wait_for_all_philosophers(t_data *philosopher);
+static void	get_start_time_and_sync(t_data *philosopher);
+static void	eat_sleep_repeat(t_data *philosopher);
 
 void	*routine(void *arg)
 {
 	t_data	*philosopher;
-	int		ate_enough;
-	int		someone_died;
 
 	philosopher = (t_data *)arg;
 	philosopher->time_last_eaten = malloc(sizeof(long long));
@@ -20,6 +20,15 @@ void	*routine(void *arg)
 	wait_for_all_philosophers(philosopher);
 	if (one_philosopher(philosopher) == TRUE)
 		return (0);
+	eat_sleep_repeat(philosopher);
+	return (0);
+}
+
+static void	eat_sleep_repeat(t_data *philosopher)
+{
+	int		ate_enough;
+	int		someone_died;
+
 	ate_enough = FALSE;
 	someone_died = FALSE;
 	while (ate_enough == FALSE && someone_died == FALSE)
@@ -33,7 +42,6 @@ void	*routine(void *arg)
 			someone_died = TRUE;
 		pthread_mutex_unlock(philosopher->enough_mutex);
 	}
-	return (0);
 }
 
 static void	wait_for_all_philosophers(t_data *philosopher)
@@ -53,6 +61,11 @@ static void	wait_for_all_philosophers(t_data *philosopher)
 		if (flag == TRUE)
 			break ;
 	}
+	get_start_time_and_sync(philosopher);
+}
+
+static void	get_start_time_and_sync(t_data *philosopher)
+{
 	if (philosopher->philosopher == 1)
 		*philosopher->start_time = get_time();
 	else if (philosopher->total_number_of_p < 8)
@@ -70,34 +83,6 @@ static void	wait_for_all_philosophers(t_data *philosopher)
 	pthread_mutex_unlock(philosopher->start_mutex);
 	if (philosopher->philosopher % 2 && philosopher->total_number_of_p != 1)
 		usleep(philosopher->time_to_eat * 100);
-}
-
-void	protected_print(t_data *philosopher, char *action, int state)
-{
-	long long	current_time;
-	long long	runtime;
-
-	pthread_mutex_lock(philosopher->print_mutex);
-	current_time = get_time();
-	runtime = current_time - *philosopher->start_time;
-	pthread_mutex_lock(philosopher->enough_mutex);
-	if (*philosopher->enough_meals < philosopher->total_number_of_p \
-			&& *philosopher->died == FALSE)
-		printf("%lli %i %s", runtime, philosopher->philosopher, action);
-	pthread_mutex_unlock(philosopher->enough_mutex);
-	pthread_mutex_unlock(philosopher->print_mutex);
-	if (state == EAT)
-	{
-		if (philosopher->times_eaten == philosopher->number_of_meals)
-		{
-			pthread_mutex_lock(philosopher->enough_mutex);
-			(*philosopher->enough_meals)++;
-			pthread_mutex_unlock(philosopher->enough_mutex);
-		}
-		pthread_mutex_lock(philosopher->eaten_mutex);
-		*philosopher->time_last_eaten = current_time;
-		pthread_mutex_unlock(philosopher->eaten_mutex);
-	}
 }
 
 static int	one_philosopher(t_data *philosopher)

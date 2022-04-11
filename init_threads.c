@@ -1,6 +1,7 @@
 #include "philosophers.h"
 
 static void	copy_data(t_data *data, t_data *philosopher, int i);
+static void	copy_data_two(t_data *data, t_data *philosopher, int i);
 static void	create_doctor_thread(t_data *data, \
 				t_data **philosopher, pthread_t **thread, int i);
 static void	join_threads(t_data *data, pthread_t **thread);
@@ -48,6 +49,11 @@ static void	copy_data(t_data *data, t_data *philosopher, int i)
 	philosopher->eaten_mutex = data->eaten_mutex;
 	philosopher->enough_mutex = data->enough_mutex;
 	philosopher->cutlery = data->cutlery;
+	copy_data_two(data, philosopher, i);
+}
+
+static void	copy_data_two(t_data *data, t_data *philosopher, int i)
+{
 	philosopher->philosopher = i + 1;
 	philosopher->left_fork = data->cutlery[i];
 	if (philosopher->total_number_of_p == 1)
