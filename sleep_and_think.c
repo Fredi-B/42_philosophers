@@ -18,13 +18,14 @@ void	sleep_and_think(t_data *philosopher)
 			if (*philosopher->died == TRUE)
 				someone_died = TRUE;
 			pthread_mutex_unlock(philosopher->enough_mutex);
-			usleep(20);
 		}
 	}
 	else
 		ft_sleep(philosopher, current_time, philosopher->time_to_sleep);
 	protected_print(philosopher, "is thinking\n", THINK);
-	if (philosopher->total_number_of_p > 30)
+	if (philosopher->total_number_of_p > 170)
+		usleep(820);
+	else if (philosopher->total_number_of_p > 30)
 		usleep(200);
 	else
 		usleep(200);

@@ -59,8 +59,10 @@ static void	wait_for_all_philosophers(t_data *philosopher)
 		usleep(philosopher->total_number_of_p * 30);
 	else if (philosopher->total_number_of_p < 30)
 		usleep(philosopher->total_number_of_p * 15);
+	else if (philosopher->total_number_of_p < 170)
+		usleep(philosopher->total_number_of_p * 3);
 	else
-		usleep(philosopher->total_number_of_p * 5);
+		usleep(philosopher->total_number_of_p);
 	pthread_mutex_lock(philosopher->eaten_mutex);
 	pthread_mutex_lock(philosopher->start_mutex);
 	*philosopher->time_last_eaten = *philosopher->start_time;
@@ -83,6 +85,7 @@ void	protected_print(t_data *philosopher, char *action, int state)
 			&& *philosopher->died == FALSE)
 		printf("%lli %i %s", runtime, philosopher->philosopher, action);
 	pthread_mutex_unlock(philosopher->enough_mutex);
+	pthread_mutex_unlock(philosopher->print_mutex);
 	if (state == EAT)
 	{
 		if (philosopher->times_eaten == philosopher->number_of_meals)
@@ -95,7 +98,6 @@ void	protected_print(t_data *philosopher, char *action, int state)
 		*philosopher->time_last_eaten = current_time;
 		pthread_mutex_unlock(philosopher->eaten_mutex);
 	}
-	pthread_mutex_unlock(philosopher->print_mutex);
 }
 
 static int	one_philosopher(t_data *philosopher)
