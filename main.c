@@ -16,3 +16,31 @@ int	main(int argc, char **argv)
 	// system("leaks philosopher");
 	return (0);
 }
+
+void	protected_print(t_data *philosopher, char *action, int state)
+{
+	long long	current_time;
+	long long	runtime;
+
+	pthread_mutex_lock(philosopher->print_mutex);
+	current_time = get_time();
+	runtime = current_time - *philosopher->start_time;
+	pthread_mutex_lock(philosopher->enough_mutex);
+	if (*philosopher->enough_meals < philosopher->total_number_of_p \
+			&& *philosopher->died == FALSE)
+		printf("%lli %i %s", runtime, philosopher->philosopher, action);
+	pthread_mutex_unlock(philosopher->enough_mutex);
+	pthread_mutex_unlock(philosopher->print_mutex);
+	if (state == EAT)
+	{
+		if (philosopher->times_eaten == philosopher->number_of_meals)
+		{
+			pthread_mutex_lock(philosopher->enough_mutex);
+			(*philosopher->enough_meals)++;
+			pthread_mutex_unlock(philosopher->enough_mutex);
+		}
+		pthread_mutex_lock(philosopher->eaten_mutex);
+		*philosopher->time_last_eaten = current_time;
+		pthread_mutex_unlock(philosopher->eaten_mutex);
+	}
+}
