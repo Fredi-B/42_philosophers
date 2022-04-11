@@ -1,8 +1,11 @@
 #include "philosophers.h"
 
-static int	doctor_sleeps(t_data *philosopher);
-static void	philosopher_died(t_data **philosophers, \
-								long long current_time, int i);
+static int			doctor_sleeps(t_data *philosopher);
+static long long	get_time_passed(t_data *philosopher, \
+										long long current_time);
+static int			sb_died(t_data **philosophers, \
+				long long current_time, long long time_passed, int i);
+static int			check_meals(t_data *philosopher);
 
 void	*doctor(void *arg)
 {
@@ -10,29 +13,17 @@ void	*doctor(void *arg)
 	long long	current_time;
 	long long	time_passed;
 	int			i;
-	int			flag;
 
 	philosophers = (t_data **)arg;
 	i = doctor_sleeps(philosophers[0]);
-	flag = FALSE;
 	while (1)
 	{
 		current_time = get_time();
-		pthread_mutex_lock(philosophers[i]->eaten_mutex);
-		time_passed = (current_time - *philosophers[i]->time_last_eaten);
-		pthread_mutex_unlock(philosophers[i]->eaten_mutex);
-		if (time_passed >= philosophers[i]->time_to_die)
-		{
-			philosopher_died(philosophers, current_time, i);
+		time_passed = get_time_passed(philosophers[i], current_time);
+		if (sb_died(philosophers, current_time, time_passed, i) == TRUE)
 			break ;
-		}
 		i++;
-		pthread_mutex_lock(philosophers[0]->enough_mutex);
-		if (*philosophers[0]->enough_meals == \
-				philosophers[0]->total_number_of_p)
-				flag = TRUE;
-		pthread_mutex_unlock(philosophers[0]->enough_mutex);
-		if (flag == TRUE)
+		if (check_meals(philosophers[0]) == TRUE)
 			break ;
 		if (i == philosophers[0]->total_number_of_p)
 			i = 0;
@@ -49,9 +40,21 @@ static int	doctor_sleeps(t_data *philosopher)
 	return (0);
 }
 
-static void	philosopher_died(t_data **philosophers, \
-								long long current_time, int i)
+static long long	get_time_passed(t_data *philosopher, long long current_time)
 {
+	long long	time_passed;
+
+	pthread_mutex_lock(philosopher->eaten_mutex);
+	time_passed = (current_time - *philosopher->time_last_eaten);
+	pthread_mutex_unlock(philosopher->eaten_mutex);
+	return (time_passed);
+}
+
+static int	sb_died(t_data **philosophers, long long current_time, \
+								long long time_passed, int i)
+{
+	if (time_passed < philosophers[i]->time_to_die)
+		return (FALSE);
 	pthread_mutex_lock(philosophers[0]->enough_mutex);
 	*philosophers[0]->died = TRUE;
 	pthread_mutex_unlock(philosophers[0]->enough_mutex);
@@ -60,4 +63,18 @@ static void	philosopher_died(t_data **philosophers, \
 	printf("%lli %i died\n", (current_time - \
 		*philosophers[i]->start_time), philosophers[0]->philosopher);
 	pthread_mutex_unlock(philosophers[0]->start_mutex);
+	return (TRUE);
+}
+
+static int	check_meals(t_data *philosopher)
+{
+	int	flag;
+
+	flag = FALSE;
+	pthread_mutex_lock(philosopher->enough_mutex);
+	if (*philosopher->enough_meals == \
+			philosopher->total_number_of_p)
+			flag = TRUE;
+	pthread_mutex_unlock(philosopher->enough_mutex);
+	return (flag);
 }
