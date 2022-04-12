@@ -6,20 +6,18 @@
 #    By: fbechtol <fbechtol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/11 16:11:33 by fbechtol          #+#    #+#              #
-#    Updated: 2022/04/12 15:53:30 by fbechtol         ###   ########.fr        #
+#    Updated: 2022/04/12 20:00:35 by fbechtol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = philo
+NAME = philo_bonus
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror #-g -ggdb3 -fsanitize=address
 ODIR = o-files
 UNAME_S := $(shell uname -s)
-CFILES = main.c parsing.c libft_utils.c free_data.c \
-			init_mutexes.c init_pointer.c init_threads.c \
-			routine.c eat.c sleep_and_think.c doctor.c \
-			time.c
+CFILES = main_bonus.c parsing_bonus.c libft_utils_bonus.c \
+		routine_bonus.c
 OBJECTS := $(patsubst %.c,%.o,$(CFILES))
 OBJECTS := $(addprefix $(ODIR)/,$(OBJECTS))
 
@@ -37,9 +35,11 @@ else
 	$(CC) $(CFLAGS) -c $< -o $@ 
 endif
 
-
 .phony: all
 all: $(NAME)
+
+.phony: bonus
+bonus: all
 
 .phony: clean
 clean:
