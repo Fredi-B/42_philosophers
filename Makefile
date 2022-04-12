@@ -6,34 +6,35 @@
 #    By: fbechtol <fbechtol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/11 16:11:33 by fbechtol          #+#    #+#              #
-#    Updated: 2022/04/11 16:45:02 by fbechtol         ###   ########.fr        #
+#    Updated: 2022/04/12 13:35:35 by fbechtol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philosophers
 
-CC = gcc -g #-fsanitize=thread
+CC = cc
 CFLAGS = -Wall -Wextra -Werror #-g -ggdb3 -fsanitize=address
 ODIR = o-files
-OBJECTS = $(patsubst %.c,%.o,$(CFILES))
 UNAME_S := $(shell uname -s)
 CFILES = main.c parsing.c libft_utils.c free_data.c \
 			init_mutexes.c init_pointer.c init_threads.c \
 			routine.c eat.c sleep_and_think.c doctor.c \
 			time.c
+OBJECTS := $(patsubst %.c,%.o,$(CFILES))
+OBJECTS := $(addprefix $(ODIR)/,$(OBJECTS))
 
 $(NAME): $(OBJECTS)
 ifeq ($(UNAME_S),Linux)
-	$(CC) $(CFLAGS) $(addprefix $(ODIR)/,$(OBJECTS)) -o $(NAME) -lpthread
+	$(CC) $(CFLAGS) $(OBJECTS) -o $(NAME) -lpthread
 else
-	$(CC) $(CFLAGS) $(addprefix $(ODIR)/,$(OBJECTS)) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJECTS) -o $(NAME)
 endif
 
-%.o: %.c
+$(ODIR)/%.o: %.c
 ifeq ($(UNAME_S),Linux)
-	$(CC) $(CFLAGS) -c $< -o $(ODIR)/$@
+	$(CC) $(CFLAGS) -c $< -o $@
 else
-	$(CC) $(CFLAGS) -c $< -o $(ODIR)/$@ 
+	$(CC) $(CFLAGS) -c $< -o $@ 
 endif
 
 
@@ -42,10 +43,10 @@ all: $(NAME)
 
 .phony: clean
 clean:
-	rm -f $(ODIR)/*.o
+	rm -f $(OBJECTS)
 
 .phony: fclean
-fclean:
+fclean: clean
 	rm -f $(NAME) *~
 
 .phony: re
