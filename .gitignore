@@ -56,4 +56,5 @@ outfile
 .vscode/launch.json
 .vscode/tasks.json
 .DS_Store
+philo_bonus/philo_bonus
 philo/philo
