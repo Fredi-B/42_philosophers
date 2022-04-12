@@ -6,7 +6,7 @@
 /*   By: fbechtol <fbechtol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 16:11:46 by fbechtol          #+#    #+#             */
-/*   Updated: 2022/04/11 16:11:47 by fbechtol         ###   ########.fr       */
+/*   Updated: 2022/04/11 16:41:41 by fbechtol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,11 @@ static void	wait_for_all_philosophers(t_data *philosopher)
 static void	get_start_time_and_sync(t_data *philosopher)
 {
 	if (philosopher->philosopher == 1)
+	{
+		pthread_mutex_lock(philosopher->start_mutex);
 		*philosopher->start_time = get_time();
+		pthread_mutex_unlock(philosopher->start_mutex);
+	}
 	else if (philosopher->total_number_of_p < 8)
 		usleep(philosopher->total_number_of_p * 30);
 	else if (philosopher->total_number_of_p < 30)
