@@ -52,8 +52,8 @@ Mkfile.old
 dkms.conf
 
 # Misc
-philosophers
 outfile
 .vscode/launch.json
 .vscode/tasks.json
 .DS_Store
+philo/philo
