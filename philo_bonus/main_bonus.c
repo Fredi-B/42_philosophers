@@ -1,22 +1,28 @@
 #include "philosophers_bonus.h"
 
+static void	create_semaphores(t_data *data);
 static void	create_philosophers(t_data *data);
 
 int	main(int argc, char **argv)
 {
 	t_data			data;
-	struct timeval	tv;
-
 
 	if (parsing(&data, argc, argv) == ERROR)
 		exit(1);
-	data.cutlery_sem = sem_open("cutlery",O_CREAT, 0644, data.total_number_of_p);
-	data.print_sem = sem_open("print",O_CREAT, 0644, 1);
-	gettimeofday(&tv, NULL);
-	data.start_time = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
+	create_semaphores(&data);
 	create_philosophers(&data);
 	return (0);
 }
+static void	create_semaphores(t_data *data)
+{
+	data->cutlery_sem = sem_open("cutlery",O_CREAT, 0644, data->total_number_of_p);
+	sem_unlink("cutlery");
+	data->print_sem = sem_open("print",O_CREAT, 0644, 1);
+	sem_unlink("print");
+	data->wait_for_children = sem_open("wait_for_children", O_CREAT, 0644, 0);
+	sem_unlink("wait_for_children");
+}
+	
 
 static void	create_philosophers(t_data *data)
 {
