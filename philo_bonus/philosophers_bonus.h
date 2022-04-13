@@ -34,10 +34,12 @@ typedef struct s_data
 	int			time_to_eat;
 	int			time_to_sleep;
 	int			number_of_meals;
-	int			philosopher;
 	long long	start_time;
 	sem_t		*cutlery_sem;
 	sem_t		*print_sem;
+	sem_t		*wait_for_children;
+	int			philosopher;
+	long long	time_last_eaten;
 	
 }				t_data;
 
@@ -50,5 +52,10 @@ int	ft_atoi(const char *str);
 int	ft_is_pos_int(char *str);
 /*  ----------------------- routine_utils_bonus.c -------------------------- */
 void	routine(t_data *data);
-
+/*  ---------------------------- eat_bonus.c ------------------------------- */
+void	eat(t_data *data);
+/*  --------------------------- print_bonus.c ------------------------------ */
+void	protected_print(t_data *data, char *action);
+/*  ------------------------- time_utils_bonus.c --------------------------- */
+long long	ft_get_time(void);
 #endif
