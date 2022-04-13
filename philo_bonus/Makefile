@@ -1,23 +1,11 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: fbechtol <fbechtol@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/04/11 16:11:33 by fbechtol          #+#    #+#              #
-#    Updated: 2022/04/12 20:00:35 by fbechtol         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME = philo_bonus
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror #-g -ggdb3 -fsanitize=address
 ODIR = o-files
 UNAME_S := $(shell uname -s)
-CFILES = main_bonus.c parsing_bonus.c libft_utils_bonus.c \
-		routine_bonus.c
+CFILES = main_bonus.c parsing_bonus.c libft_utils_bonus.c time_bonus.c \
+		routine_bonus.c eat_bonus.c print_bonus.c
 OBJECTS := $(patsubst %.c,%.o,$(CFILES))
 OBJECTS := $(addprefix $(ODIR)/,$(OBJECTS))
 
