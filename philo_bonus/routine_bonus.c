@@ -2,5 +2,6 @@
 
 void	routine(t_data *data)
 {
-	diprintf(data->philosopher);
+	sem_wait(data->wait_for_children);
+	sem_post(data->wait_for_children);
 }
