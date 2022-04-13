@@ -37,5 +37,6 @@ static void	create_philosophers(t_data *data)
 		}
 		i++;
 	}
+	sem_post(data->wait_for_children);
 	waitpid(-1, 0, 0);
 }
