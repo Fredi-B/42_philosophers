@@ -48,6 +48,7 @@ static void	get_data(t_data *data, int argc, char **argv)
 		data->number_of_meals = ft_atoi(argv[5]);
 	else
 		data->number_of_meals = -1;
+	data->start_time = 0;
 	data->philosopher = 0;
-
+	data->time_last_eaten = 0;
 }
