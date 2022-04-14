@@ -40,6 +40,7 @@ typedef struct s_data
 	sem_t		*wait_for_children;
 	int			philosopher;
 	long long	time_last_eaten;
+	int			times_eaten;
 	
 }				t_data;
 
