@@ -39,7 +39,7 @@ typedef struct s_data
 	sem_t		*print_sem;
 	sem_t		*wait_for_children;
 	int			philosopher;
-	long long	time_last_eaten;
+	long long	*time_last_eaten;
 	int			times_eaten;
 	
 }				t_data;
@@ -60,4 +60,7 @@ long long	protected_print(t_data *data, char *action);
 /*  ------------------------- time_utils_bonus.c --------------------------- */
 long long	ft_get_time(void);
 void	ft_sleep(long long current_time, long long chill);
+/*  -------------------------- doctor_bonus.c ------------------------------ */
+void	create_doctor(t_data *data);
+
 #endif
