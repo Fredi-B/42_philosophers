@@ -2,6 +2,8 @@
 
 static int	one_philosopher(t_data *data);
 static void	eat_sleep_repeat(t_data *data);
+static void	sleep_and_think(t_data *data);
+static void	sync_philosophers(t_data *data);
 
 void	routine(t_data *data)
 {
@@ -18,10 +20,31 @@ void	routine(t_data *data)
 
 static void	eat_sleep_repeat(t_data *data)
 {
-	while (1)
+	// while (1)
 	{
 		eat(data);
+		sleep_and_think(data);
 	}
+}
+
+static void	sleep_and_think(t_data *data)
+{
+	long long	current_time;
+
+	current_time = protected_print(data, "is sleeping\n");
+	ft_sleep(current_time, data->time_to_sleep);
+	protected_print(data, "is thinking\n");
+	sync_philosophers(data);
+}
+
+static void	sync_philosophers(t_data *data)
+{
+	if (data->total_number_of_p > 170)
+		usleep(820);
+	else if (data->total_number_of_p > 12)
+		usleep(40);
+}
+
 static int	one_philosopher(t_data *data)
 {
 	long long	current_time;
