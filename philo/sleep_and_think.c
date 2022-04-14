@@ -6,7 +6,7 @@
 /*   By: fbechtol <fbechtol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 16:11:49 by fbechtol          #+#    #+#             */
-/*   Updated: 2022/04/12 13:10:49 by fbechtol         ###   ########.fr       */
+/*   Updated: 2022/04/14 11:54:35 by fbechtol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,9 @@ static void	sync_philosophers(t_data *philosopher);
 void	sleep_and_think(t_data *philosopher)
 {
 	long long	current_time;
-	long long	time_passed;
 
 	protected_print(philosopher, "is sleeping\n", SLEEP);
 	current_time = get_time();
-	time_passed = (current_time - *philosopher->time_last_eaten);
 	ft_sleep(philosopher, current_time, philosopher->time_to_sleep);
 	protected_print(philosopher, "is thinking\n", THINK);
 	sync_philosophers(philosopher);
