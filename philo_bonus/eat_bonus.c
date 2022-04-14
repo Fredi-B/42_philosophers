@@ -10,6 +10,8 @@ void	eat(t_data *data)
 	ft_sleep(data->time_last_eaten, data->time_to_eat);
 	data->times_eaten++;
 	put_forks(data);
+	if (data->times_eaten == data->number_of_meals)
+		exit(0);
 }
 
 static void	take_forks(t_data *data)
