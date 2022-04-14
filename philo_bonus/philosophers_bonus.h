@@ -56,7 +56,8 @@ void	routine(t_data *data);
 /*  ---------------------------- eat_bonus.c ------------------------------- */
 void	eat(t_data *data);
 /*  --------------------------- print_bonus.c ------------------------------ */
-void	protected_print(t_data *data, char *action);
+long long	protected_print(t_data *data, char *action);
 /*  ------------------------- time_utils_bonus.c --------------------------- */
 long long	ft_get_time(void);
+void	ft_sleep(long long current_time, long long chill);
 #endif
