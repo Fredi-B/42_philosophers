@@ -5,7 +5,7 @@ CFLAGS = -Wall -Wextra -Werror #-g -ggdb3 -fsanitize=address
 ODIR = o-files
 UNAME_S := $(shell uname -s)
 CFILES = main_bonus.c parsing_bonus.c libft_utils_bonus.c time_bonus.c \
-		routine_bonus.c eat_bonus.c print_bonus.c
+		routine_bonus.c eat_bonus.c print_bonus.c doctor_bonus.c
 OBJECTS := $(patsubst %.c,%.o,$(CFILES))
 OBJECTS := $(addprefix $(ODIR)/,$(OBJECTS))
 
