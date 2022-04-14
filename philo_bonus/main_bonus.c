@@ -11,6 +11,10 @@ int	main(int argc, char **argv)
 		exit(1);
 	create_semaphores(&data);
 	create_philosophers(&data);
+	waitpid(-1, 0, 0);
+	// kill(0, SIGINT);
+	// system("leaks philo_bonus");
+	sleep(1);
 	return (0);
 }
 static void	create_semaphores(t_data *data)
@@ -44,5 +48,4 @@ static void	create_philosophers(t_data *data)
 		i++;
 	}
 	sem_post(data->wait_for_children);
-	waitpid(-1, 0, 0);
 }
