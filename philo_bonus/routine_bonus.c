@@ -21,7 +21,6 @@ void	routine(t_data *data)
 
 static void	eat_sleep_repeat(t_data *data)
 {
-	create_doctor(data);
 	while (1)
 	{
 		eat(data);

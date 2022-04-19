@@ -7,6 +7,8 @@ void	eat(t_data *data)
 {
 	take_forks(data);
 	data->time_last_eaten = protected_print(data, "is eating\n");
+	create_doctor(data);
+
 	ft_sleep(data->time_last_eaten, data->time_to_eat);
 	data->times_eaten++;
 	put_forks(data);
