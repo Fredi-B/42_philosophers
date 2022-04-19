@@ -18,15 +18,13 @@ static void	*doctor(void * arg)
 {
 	t_data		*data;
 	long long	current_time;
+	long long	last_eaten;
 
 	data = (t_data *)arg;
-	while(1)
-	{
-		usleep(50);
-		current_time = ft_get_time();
-		// printf("\n%i %lld\n", data->philosopher, current_time - data->time_last_eaten);
-		if (data->time_to_die < current_time - data->time_last_eaten)
-			protected_print(data, "died\n");
-	}
+	last_eaten = data->time_last_eaten;
+	current_time = ft_get_time();
+	ft_sleep(current_time, data->time_to_die + 1);
+	if (last_eaten == data->time_last_eaten)
+		protected_print(data, "died\n");
 	return (NULL);
 }
