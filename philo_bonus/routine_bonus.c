@@ -10,6 +10,7 @@ void	routine(t_data *data)
 	sem_wait(data->wait_for_children);
 	sem_post(data->wait_for_children);
 	data->start_time = ft_get_time();
+	data->time_last_eaten = data->start_time;
 	if (one_philosopher(data) == TRUE)
 		exit(0);
 	if (data->philosopher % 2 && data->total_number_of_p != 1)
@@ -20,9 +21,9 @@ void	routine(t_data *data)
 
 static void	eat_sleep_repeat(t_data *data)
 {
+	create_doctor(data);
 	while (1)
 	{
-		create_doctor(data);
 		eat(data);
 		sleep_and_think(data);
 	}

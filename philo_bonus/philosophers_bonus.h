@@ -39,7 +39,7 @@ typedef struct s_data
 	sem_t		*print_sem;
 	sem_t		*wait_for_children;
 	int			philosopher;
-	long long	*time_last_eaten;
+	long long	time_last_eaten;
 	int			times_eaten;
 	
 }				t_data;
@@ -51,6 +51,7 @@ int	parsing(t_data *data, int argc, char **argv);
 /*  ------------------------ libft_utils_bonus.c --------------------------- */
 int	ft_atoi(const char *str);
 int	ft_is_pos_int(char *str);
+int	ft_strncmp(const char *s1, const char *s2, size_t n);
 /*  ----------------------- routine_utils_bonus.c -------------------------- */
 void	routine(t_data *data);
 /*  ---------------------------- eat_bonus.c ------------------------------- */

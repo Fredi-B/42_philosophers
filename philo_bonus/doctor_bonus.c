@@ -4,21 +4,29 @@ static void	*doctor(void *arg);
 
 void	create_doctor(t_data *data)
 {
-	pthread_t *dr;
+	pthread_t dr;
 
-	data->time_last_eaten = malloc(sizeof(long long*));
-	dr = malloc(sizeof(pthread_t));
-	if (!data->time_last_eaten || !dr)
-		kill(0, SIGINT);
-	*data->time_last_eaten = data->start_time;
-	pthread_create(dr, 0, doctor, data->time_last_eaten);
+	if (pthread_create(&dr, NULL, &doctor, (void *) data) != 0)
+	{
+		write(2, "Error: creating doctor thread\n", 30);
+		exit(1);
+	}
+	pthread_detach(dr);
 }
 
 static void	*doctor(void * arg)
 {
-	long long	*time_last_eaten;
+	t_data		*data;
+	long long	current_time;
 
-	time_last_eaten = (long long *)arg;
-	
+	data = (t_data *)arg;
+	while(1)
+	{
+		usleep(50);
+		current_time = ft_get_time();
+		// printf("\n%i %lld\n", data->philosopher, current_time - data->time_last_eaten);
+		if (data->time_to_die < current_time - data->time_last_eaten)
+			protected_print(data, "died\n");
+	}
 	return (NULL);
 }
