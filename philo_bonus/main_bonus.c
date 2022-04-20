@@ -2,6 +2,7 @@
 
 static void	create_semaphores(t_data *data);
 static void	create_philosophers(t_data *data);
+static void	close_semaphores(t_data *data);
 
 int	main(int argc, char **argv)
 {
@@ -11,10 +12,10 @@ int	main(int argc, char **argv)
 		exit(1);
 	create_semaphores(&data);
 	create_philosophers(&data);
-	waitpid(-1, 0, 0);
-	// kill(0, SIGINT);
-	// system("leaks philo_bonus");
-	sleep(1);
+	while (waitpid(-1, 0, 0) != -1)
+	{
+	}
+	close_semaphores(&data);
 	return (0);
 }
 static void	create_semaphores(t_data *data)
@@ -27,6 +28,12 @@ static void	create_semaphores(t_data *data)
 	sem_unlink("wait_for_children");
 }
 	
+static void	close_semaphores(t_data *data)
+{
+	sem_close(data->cutlery_sem);
+	sem_close(data->print_sem);
+	sem_close(data->wait_for_children);
+}
 
 static void	create_philosophers(t_data *data)
 {
