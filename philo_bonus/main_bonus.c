@@ -6,7 +6,7 @@ static void	close_semaphores(t_data *data);
 
 int	main(int argc, char **argv)
 {
-	t_data			data;
+	t_data	data;
 
 	if (parsing(&data, argc, argv) == ERROR)
 		exit(1);
@@ -18,16 +18,18 @@ int	main(int argc, char **argv)
 	close_semaphores(&data);
 	return (0);
 }
+
 static void	create_semaphores(t_data *data)
 {
-	data->cutlery_sem = sem_open("cutlery",O_CREAT, 0644, data->total_number_of_p);
+	data->cutlery_sem = sem_open("cutlery", O_CREAT, 0644, \
+									data->total_number_of_p);
 	sem_unlink("cutlery");
-	data->print_sem = sem_open("print",O_CREAT, 0644, 1);
+	data->print_sem = sem_open("print", O_CREAT, 0644, 1);
 	sem_unlink("print");
 	data->wait_for_children = sem_open("wait_for_children", O_CREAT, 0644, 0);
 	sem_unlink("wait_for_children");
 }
-	
+
 static void	close_semaphores(t_data *data)
 {
 	sem_close(data->cutlery_sem);

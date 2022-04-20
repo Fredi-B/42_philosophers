@@ -4,7 +4,7 @@ static void	*doctor(void *arg);
 
 void	create_doctor(t_data *data)
 {
-	pthread_t dr;
+	pthread_t	dr;
 
 	if (pthread_create(&dr, NULL, &doctor, (void *) data) != 0)
 	{
@@ -14,7 +14,7 @@ void	create_doctor(t_data *data)
 	pthread_detach(dr);
 }
 
-static void	*doctor(void * arg)
+static void	*doctor(void *arg)
 {
 	t_data		*data;
 	long long	current_time;
