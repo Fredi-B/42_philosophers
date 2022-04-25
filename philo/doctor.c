@@ -6,7 +6,7 @@
 /*   By: fbechtol <fbechtol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 16:10:47 by fbechtol          #+#    #+#             */
-/*   Updated: 2022/04/12 13:07:51 by fbechtol         ###   ########.fr       */
+/*   Updated: 2022/04/25 12:46:34 by fbechtol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static int	sb_died(t_data **philosophers, long long current_time, \
 	usleep(50);
 	pthread_mutex_lock(philosophers[0]->start_mutex);
 	printf("%lli %i died\n", (current_time - \
-		*philosophers[i]->start_time), philosophers[0]->philosopher);
+		*philosophers[i]->start_time), philosophers[i]->philosopher);
 	pthread_mutex_unlock(philosophers[0]->start_mutex);
 	return (TRUE);
 }
